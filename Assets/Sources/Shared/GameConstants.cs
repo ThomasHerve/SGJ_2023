@@ -1,6 +1,6 @@
 ﻿namespace Unity.MultiPlayerGame.Shared
 {
-    public class GameConstants
+    public static class GameConstants
     {
         // all the constant string used across the game
         public const string k_AxisNameVertical = "Vertical";

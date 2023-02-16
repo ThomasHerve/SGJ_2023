@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 0716ee95ce1d133459d0cf961dd7cb76
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - animationFade: {fileID: 7400000, guid: 0153d0b0b9ea48e44b4cdf84f53b76f4, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
