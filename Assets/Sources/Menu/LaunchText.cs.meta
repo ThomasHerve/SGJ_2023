@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 0716ee95ce1d133459d0cf961dd7cb76
+guid: 9ee218d46216eba4ea4f2e20b20eef0c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - animationFade: {fileID: 7400000, guid: 0153d0b0b9ea48e44b4cdf84f53b76f4, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
