@@ -16,7 +16,6 @@ public class Lobby:MonoBehaviour
     {
         InputDevice id = player.GetComponent<PlayerInput>().GetDevice<InputDevice>();
 
-        PlayerInstance.AddPlayer(id);
 
 
         if (PlayerInstance.currentPlayerNumber >= 2)
@@ -28,7 +27,6 @@ public class Lobby:MonoBehaviour
 
     public void OnPlayerLeft(PlayerInstance player)
     {
-        PlayerInstance.RemovePlayer(player.InputDevice);
 
         if (PlayerInstance.currentPlayerNumber < 2)
         {

@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerPlaceHolder0
+  - PlayerPlaceHolder1
+  - PlayerPlaceHolder2
+  - PlayerPlaceHolder3
   layers:
   - Default
   - TransparentFX
