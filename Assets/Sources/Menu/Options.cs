@@ -4,21 +4,24 @@ using Unity.MultiPlayerGame.Shared;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class Options : MonoBehaviour
+namespace Unity.MultiPlayerGame.Menu
 {
-    [SerializeField]
-    private  AudioMixer mainMixer;
-
-
-    public void ChangeMasterVolume(float sliderVal)
+    public class Options : MonoBehaviour
     {
-        GameOptions.masterVolume = Mathf.Log10(sliderVal) * 20;
-        mainMixer.SetFloat("MasterVolume", GameOptions.masterVolume);
-    }
+        [SerializeField]
+        private AudioMixer mainMixer;
 
-    public void ChangeMusicVolume(float sliderVal)
-    {
-        GameOptions.musicVolume = Mathf.Log10(sliderVal) * 20;
-        mainMixer.SetFloat("MusicVolume", GameOptions.musicVolume);
+
+        public void ChangeMasterVolume(float sliderVal)
+        {
+            GameOptions.masterVolume = Mathf.Log10(sliderVal) * 20;
+            mainMixer.SetFloat("MasterVolume", GameOptions.masterVolume);
+        }
+
+        public void ChangeMusicVolume(float sliderVal)
+        {
+            GameOptions.musicVolume = Mathf.Log10(sliderVal) * 20;
+            mainMixer.SetFloat("MusicVolume", GameOptions.musicVolume);
+        }
     }
 }

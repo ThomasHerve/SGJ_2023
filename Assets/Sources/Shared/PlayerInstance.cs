@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 namespace Unity.MultiPlayerGame.Shared
@@ -22,6 +24,9 @@ namespace Unity.MultiPlayerGame.Shared
         public static List<PlayerInstance> players = new List<PlayerInstance>(Enumerable.Repeat<PlayerInstance>(null, MAX_PLAYER));
         public static int currentPlayerNumber = 0;
 
+        private static InputSystemUIInputModule uIInputModule;
+        private static bool canCancel = true;
+        private static bool canSubmit = true;
 
         public static int AddPlayer(PlayerInstance player)
         {
@@ -44,6 +49,12 @@ namespace Unity.MultiPlayerGame.Shared
             players[players.IndexOf(player)] = null;
 
             currentPlayerNumber--;
+
+        }
+
+        public static bool AreAllPlayersReady()
+        {
+            return players.Any(player => player != null) && players.Where(p => p != null).All(p => p.isReady);
         }
 
         #endregion
@@ -64,9 +75,12 @@ namespace Unity.MultiPlayerGame.Shared
 
         int number = -1;
         int skin = 0;
+        bool isReady = false;
+
         public void Start()
         {
-            Debug.Log("Player Launch");
+
+
             inputDevice = GetComponent<PlayerInput>().GetDevice<InputDevice>();
 
             number = AddPlayer(this);
@@ -82,38 +96,47 @@ namespace Unity.MultiPlayerGame.Shared
             this.transform.SetParent(placeholder.transform);
             this.transform.localPosition = new Vector3(0, 0, 0);
             this.transform.localScale = new Vector3(1, 1, 1);
+
             Debug.Log("Player added at position " + number);
 
-           GetComponent<PlayerInput>().actions.FindAction("PlayerNavigate").performed += OnPlayerNavigateCustom;
+            GameObject.FindGameObjectWithTag("EventSystem").GetComponent<InputSystemUIInputModule>().actionsAsset.FindAction("Cancel").Disable();
+
+
         }
 
-        public void Update()
+        public void OnPlayerCancel(InputAction.CallbackContext context)
         {
-        }
+            if (!context.performed)
+                return;
 
-
-        void OnPlayerCancel()
-        {
-            Debug.Log("Player Removal");
+            if (isReady)
+            {
+                isReady = false;
+                return;
+            }
 
             RemovePlayer(this);
 
-            Debug.Log("Player removed at position " + number);
-
             Destroy(gameObject);
 
+
         }
 
-        void OnPlayerSubmit()
+        public void OnPlayerSubmit(InputAction.CallbackContext context)
         {
+            if (!context.performed)
+                return;
+            isReady = true;
 
         }
 
-        void OnPlayerNavigateCustom(InputAction.CallbackContext context)
+        public void OnPlayerNavigate(InputAction.CallbackContext context)
         {
             if (!context.performed)
                 return;
             if (skinList.Length == 0)
+                return;
+            if (isReady)
                 return;
 
             if (context.ReadValue<Vector2>().x < 0) //gauche
@@ -129,9 +152,11 @@ namespace Unity.MultiPlayerGame.Shared
 
         public void OnDestroy()
         {
-            GetComponent<PlayerInput>().actions.FindAction("PlayerNavigate").performed -= OnPlayerNavigateCustom;
             Destroy(GetComponent<PlayerInput>());
 
+            if (currentPlayerNumber == 0)
+                GameObject.FindGameObjectWithTag("EventSystem").GetComponent<InputSystemUIInputModule>().actionsAsset.FindAction("Cancel").Enable();
+            
         }
 
         #endregion

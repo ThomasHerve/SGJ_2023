@@ -8,44 +8,27 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Unity.MultiPlayerGame.Shared;
+using UnityEngine.EventSystems;
 
-public class Lobby:MonoBehaviour
+namespace Unity.MultiPlayerGame.Menu
 {
-   
-    public void OnPlayerJoin(GameObject player)
+    public class Lobby : MonoBehaviour
     {
-        InputDevice id = player.GetComponent<PlayerInput>().GetDevice<InputDevice>();
+        [SerializeField]
+        public Button goBtn;
 
-
-
-        if (PlayerInstance.currentPlayerNumber >= 2)
+        private void Update()
         {
-            //GameObject.FindGameObjectWithTag("SelectMenu").GetComponent<Menus>().launchText.SetActive(true);
+            if(!goBtn.interactable && PlayerInstance.AreAllPlayersReady())
+            {
+                goBtn.interactable = true;
+            }
+            if(goBtn.interactable && !PlayerInstance.AreAllPlayersReady())
+            {
+                goBtn.interactable = false;
+            }
         }
-            
-    }
 
-    public void OnPlayerLeft(PlayerInstance player)
-    {
-
-        if (PlayerInstance.currentPlayerNumber < 2)
-        {
-            //GameObject.FindGameObjectWithTag("SelectMenu").GetComponent<Menus>().launchText.SetActive(false);
-        }
 
     }
-
-    public void GetCancelAction(InputAction.CallbackContext context)
-    {
-        PlayerInstance pi = PlayerInstance.players.FirstOrDefault(p => p.InputDevice == context.control.device);
-        if (pi != null)
-        {
-            OnPlayerLeft(pi);
-        }
-        else
-        {
-            //GameObject.FindGameObjectWithTag("SelectMenu").GetComponent<Menus>().ReturnToMainScreen();
-        }
-    }
-
 }
