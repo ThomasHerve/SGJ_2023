@@ -84,9 +84,7 @@ namespace Unity.MultiPlayerGame.Shared
             this.transform.localScale = new Vector3(1, 1, 1);
             Debug.Log("Player added at position " + number);
 
-            GetComponent<PlayerInput>().actions.FindAction("PlayerCancel").performed += OnPlayerCancel;
-            GetComponent<PlayerInput>().actions.FindAction("PlayerSubmit").performed += OnPlayerSubmit;
-            GetComponent<PlayerInput>().actions.FindAction("PlayerNavigate").performed += OnPlayerNavigate;
+           GetComponent<PlayerInput>().actions.FindAction("PlayerNavigate").performed += OnPlayerNavigateCustom;
         }
 
         public void Update()
@@ -94,7 +92,7 @@ namespace Unity.MultiPlayerGame.Shared
         }
 
 
-        private void OnPlayerCancel(InputAction.CallbackContext context)
+        void OnPlayerCancel()
         {
             Debug.Log("Player Removal");
 
@@ -106,12 +104,12 @@ namespace Unity.MultiPlayerGame.Shared
 
         }
 
-        private void OnPlayerSubmit(InputAction.CallbackContext context)
+        void OnPlayerSubmit()
         {
 
         }
 
-        public void OnPlayerNavigate(InputAction.CallbackContext context)
+        void OnPlayerNavigateCustom(InputAction.CallbackContext context)
         {
             if (!context.performed)
                 return;
@@ -131,9 +129,7 @@ namespace Unity.MultiPlayerGame.Shared
 
         public void OnDestroy()
         {
-            GetComponent<PlayerInput>().actions.FindAction("PlayerNavigate").performed -= OnPlayerNavigate;
-            GetComponent<PlayerInput>().actions.FindAction("PlayerCancel").performed -= OnPlayerCancel;
-            GetComponent<PlayerInput>().actions.FindAction("PlayerSubmit").performed -= OnPlayerSubmit;
+            GetComponent<PlayerInput>().actions.FindAction("PlayerNavigate").performed -= OnPlayerNavigateCustom;
             Destroy(GetComponent<PlayerInput>());
 
         }
