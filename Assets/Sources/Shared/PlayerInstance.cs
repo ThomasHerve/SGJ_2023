@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -21,12 +22,11 @@ namespace Unity.MultiPlayerGame.Shared
          * 
          */
         public const int MAX_PLAYER = 4;
+
         public static List<PlayerInstance> players = new List<PlayerInstance>(Enumerable.Repeat<PlayerInstance>(null, MAX_PLAYER));
         public static int currentPlayerNumber = 0;
+        public static bool has2PlayerKeyboard = false;
 
-        private static InputSystemUIInputModule uIInputModule;
-        private static bool canCancel = true;
-        private static bool canSubmit = true;
 
         public static int AddPlayer(PlayerInstance player)
         {
@@ -36,6 +36,7 @@ namespace Unity.MultiPlayerGame.Shared
 
 
             currentPlayerNumber++;
+
 
             return currentPlayerNumber - 1;
         }
@@ -49,6 +50,10 @@ namespace Unity.MultiPlayerGame.Shared
             players[players.IndexOf(player)] = null;
 
             currentPlayerNumber--;
+            if (player.inputDevice is Keyboard)
+            {
+                has2PlayerKeyboard = false;
+            }
 
         }
 
@@ -79,11 +84,10 @@ namespace Unity.MultiPlayerGame.Shared
 
         public void Start()
         {
-
-
             inputDevice = GetComponent<PlayerInput>().GetDevice<InputDevice>();
 
             number = AddPlayer(this);
+
             if (number == -1)
             {
                 Debug.Log("Too much players");
@@ -97,10 +101,14 @@ namespace Unity.MultiPlayerGame.Shared
             this.transform.localPosition = new Vector3(0, 0, 0);
             this.transform.localScale = new Vector3(1, 1, 1);
 
+            if (inputDevice != null)
+                this.transform.Find("SelectionPanel").GetComponentInChildren<TextMeshProUGUI>().text = inputDevice.name;
+            else
+                this.transform.Find("SelectionPanel").GetComponentInChildren<TextMeshProUGUI>().text = "Keyboard 2";
+
             Debug.Log("Player added at position " + number);
 
             GameObject.FindGameObjectWithTag("EventSystem").GetComponent<InputSystemUIInputModule>().actionsAsset.FindAction("Cancel").Disable();
-
 
         }
 
@@ -148,6 +156,16 @@ namespace Unity.MultiPlayerGame.Shared
 
 
             this.transform.Find("ImageHolder").GetComponent<Image>().sprite = skinList[skin];
+        }
+
+        public void OnPlayerAddOther(InputAction.CallbackContext context)
+        {
+            if (has2PlayerKeyboard)
+                return;
+
+            has2PlayerKeyboard = true;
+            GameObject newPlayer = Instantiate(this.gameObject);
+            newPlayer.GetComponent<PlayerInput>().SwitchCurrentActionMap("PlayerUI2");
         }
 
         public void OnDestroy()
