@@ -4773,16 +4773,16 @@ MonoBehaviour:
         m_Action: Join
         m_Flags: 0
       - m_Name: 
-        m_Id: d67a4ca8-61bd-4a46-94ee-4d0dc1a2a573
-        m_Path: <Keyboard>/enter
+        m_Id: d04f03e1-f6c7-401c-91a9-213b0e7b83b4
+        m_Path: <Gamepad>/start
         m_Interactions: 
         m_Processors: 
         m_Groups: 
         m_Action: Join
         m_Flags: 0
       - m_Name: 
-        m_Id: d04f03e1-f6c7-401c-91a9-213b0e7b83b4
-        m_Path: <Gamepad>/start
+        m_Id: f6ea8674-3279-409a-9304-680deb6e8518
+        m_Path: <Keyboard>/space
         m_Interactions: 
         m_Processors: 
         m_Groups: 
