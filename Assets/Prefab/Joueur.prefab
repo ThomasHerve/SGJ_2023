@@ -29,6 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7086664418470173078}
   - {fileID: 977519970}
   m_Father: {fileID: 1584563510}
   m_RootOrder: 0
@@ -114,7 +115,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 478462844}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584563509
 GameObject:
@@ -248,7 +249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7086664418470173078
 Transform:
   m_ObjectHideFlags: 0
@@ -256,12 +257,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5211749896349077665}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.58, y: -1.34, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.8929996, y: -1.1129999, z: -0.008485878}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1865201410851143716}
+  m_Father: {fileID: 478462844}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2152515537224975341
@@ -628,6 +629,8 @@ MonoBehaviour:
   high: 0
   shootClip: {fileID: 8300000, guid: eef4db7ff739e8e43aa10ce280517eb7, type: 3}
   isKeyboard: 0
+  targetObject: {fileID: 0}
+  driftDirection: {x: 0, y: 0, z: 0}
 --- !u!212 &7564733136217133217
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -874,13 +877,17 @@ MonoBehaviour:
   slowBras: {fileID: 478462843}
   mutations:
   - index: 0
-    effect: {fileID: 6795275092927828618}
+    effectBody: {fileID: 6795275092927828618}
+    effectArms: {fileID: 0}
   - index: 1
-    effect: {fileID: 3829977398135862601}
+    effectBody: {fileID: 3829977398135862601}
+    effectArms: {fileID: 0}
   - index: 2
-    effect: {fileID: 7948577444462520942}
+    effectBody: {fileID: 7948577444462520942}
+    effectArms: {fileID: 5211749896349077665}
   confuse: 0
   sleep: 0
+  armor: 0
 --- !u!82 &-2458671708955766601
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1005,8 +1012,7 @@ Transform:
   m_LocalPosition: {x: -0.18, y: 1.71, z: -0.008485878}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7086664418470173078}
+  m_Children: []
   m_Father: {fileID: 7564733136217133246}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

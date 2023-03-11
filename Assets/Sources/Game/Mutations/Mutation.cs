@@ -7,5 +7,6 @@ using UnityEngine;
 public struct Mutation
 {
     public int index;
-    public GameObject effect;
+    public GameObject effectBody;
+    public GameObject effectArms;
 }

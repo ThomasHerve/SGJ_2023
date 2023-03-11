@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         foreach (Mutation mutation in mutations)
         {
             if(mutation.index == 0 || mutation.index == 1)
-                mutation.effect.transform.rotation = Quaternion.Euler(0, transform.rotation.z, 0);
+                mutation.effectBody.transform.rotation = Quaternion.Euler(0, transform.rotation.z, 0);
         }
     }
 
@@ -58,11 +58,16 @@ public class Player : MonoBehaviour
         {
             case 0:
                 confuse = value;
-                mutations[num].effect.gameObject.SetActive(value);
+                mutations[num].effectBody.gameObject.SetActive(value);
                 break;
             case 1:
                 sleep = value;
-                mutations[num].effect.gameObject.SetActive(value);
+                mutations[num].effectBody.gameObject.SetActive(value);
+                break;
+            case 2:
+                armor = value;
+                mutations[num].effectBody.gameObject.SetActive(value);
+                mutations[num].effectArms.gameObject.SetActive(value);
                 break;
         }
 
@@ -100,7 +105,7 @@ public class Player : MonoBehaviour
     // Mutations var
     public bool confuse = false;
     public bool sleep = false;
-
+    public bool armor = false;
 
 
     // Start is called before the first frame update
@@ -117,7 +122,7 @@ public class Player : MonoBehaviour
         SetNextMutationValues();
 
         // DEBUG
-        //AddMutation(1);
+        AddMutation(2);
     }
 
     // Update is called once per frame
