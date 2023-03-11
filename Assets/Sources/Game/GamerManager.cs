@@ -21,7 +21,7 @@ public class GamerManager : MonoBehaviour
     void Start()
     {
         // DEBUG
-        if (PlayerInstance.players[0] == null)
+        if (PlayerInstance.currentPlayerNumber == 0)
         {
 
             PlayerInstance.players[0] = new PlayerInstance();
