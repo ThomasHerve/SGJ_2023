@@ -213,8 +213,8 @@ public class Player : MonoBehaviour
                     indexs.Add(i);
                     
             }
-            //AddMutation(indexs[Random.Range(0, indexs.Count)]);
-            AddMutation(3);
+            AddMutation(indexs[Random.Range(0, indexs.Count)]);
+            //AddMutation(3);
         }
     }
 
