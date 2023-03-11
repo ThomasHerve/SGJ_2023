@@ -163,7 +163,7 @@ namespace Unity.MultiPlayerGame.Shared
 
             has2PlayerKeyboard = true;
             PlayerInputManager playerInputManager = FindObjectOfType<PlayerInputManager>();
-            GameObject newPlayer =  playerInputManager.JoinPlayer(currentPlayerNumber, -1, "Keyboard", new InputDevice[] { Keyboard.current, Mouse.current }).gameObject;
+            GameObject newPlayer =  playerInputManager.JoinPlayer(currentPlayerNumber, -1, "*", new InputDevice[] { Keyboard.current, Mouse.current }).gameObject;
 
             newPlayer.GetComponent<PlayerInput>().SwitchCurrentActionMap("PlayerUI2");
         }
