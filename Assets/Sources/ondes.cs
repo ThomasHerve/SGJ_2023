@@ -80,7 +80,7 @@ public class ondes : MonoBehaviour
         {
             if (other.tag == "Player")
             {
-                other.GetComponent<Player>().TakeDamage(10);
+                other.GetComponent<Player>();
             }
 
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,7 +43,14 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         vie -= damage;
-        if (vie < 0) vie = 0;
+        Debug.Log(vie);
+        if (vie < 0) { vie = 0;}
+        if (vie == 0) Die();
         lifebar.SetHealth(vie);
+    }
+
+    private void Die()
+    {
+        characterControler.isdead = true;
     }
 }

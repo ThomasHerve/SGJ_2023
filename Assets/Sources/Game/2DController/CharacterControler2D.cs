@@ -10,6 +10,7 @@ public class CharacterControler2D : MonoBehaviour
 
 
     private Vector2 movementInput,targetInput,influence;
+    public bool isdead;
     private SpriteRenderer spriteRendererBras;
     float cd = 0f;
   
@@ -28,72 +29,76 @@ public class CharacterControler2D : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRendererBras = PivotBras.GetComponentInChildren<SpriteRenderer>();
+        isdead = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 vel;
-        if(influence != Vector2.zero)
+        Debug.Log(isdead);
+        if (!isdead)
         {
-            vel = influence * Time.deltaTime * speed;
-        }
-        else
-        {
-            vel = movementInput * Time.deltaTime * speed;
-        }
-        rigidbody.velocity = vel;
+            Vector2 vel;
+            if (influence != Vector2.zero)
+            {
+                vel = influence * Time.deltaTime * speed;
+            }
+            else
+            {
+                vel = movementInput * Time.deltaTime * speed;
+            }
+            rigidbody.velocity = vel;
 
 
-        // flip du sprite 
-        if(!isKeyboard)
-        {
-            if (targetInput.x > 0)
+            // flip du sprite 
+            if (!isKeyboard)
             {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0); ;
+                if (targetInput.x > 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0); ;
+                }
+                else if (targetInput.x < 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(180, 0, 0); ;
+                }
             }
-            else if (targetInput.x < 0)
+
+            // Cas clavier
+            if (isKeyboard)
             {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(180, 0, 0); ;
+                if (movementInput.x > 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    spriteRendererBras.gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0, 0, 0);
+                    PivotBras.transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+                else if (movementInput.x < 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, -180);
+                    spriteRendererBras.gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0, 180, 0);
+                    PivotBras.transform.rotation = Quaternion.Euler(0, 0, 180);
+                }
+            }
+            else
+            {
+                //flip des bras
+                PivotBras.transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(targetInput, Vector2.right));
+            }
+            //fonction de shoot
+            if (shootInput && Time.time - cd > 2)
+            {
+                cd = Time.time;
+                //Tirer
+                GameObject g = GameObject.Instantiate(balle, Canon.transform.position, Quaternion.Euler(0, 0, 0));
+                ondes o = g.GetComponent<ondes>();
+                o.direction = targetInput;
+                o.shooter = this.gameObject;
             }
         }
-        
-        // Cas clavier
-        if(isKeyboard)
-        {
-            if (movementInput.x > 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                spriteRendererBras.gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0, 0, 0);
-                PivotBras.transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else if (movementInput.x < 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, -180);
-                spriteRendererBras.gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0, 180, 0);
-                PivotBras.transform.rotation = Quaternion.Euler(0, 0, 180);
-            }
-        }
-        else
-        {
-            //flip des bras
-            PivotBras.transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(targetInput, Vector2.right));
-        }
-        //fonction de shoot
-        if (shootInput &&  Time.time -cd > 2)
-        {
-            cd = Time.time;
-            //Tirer
-            GameObject g=  GameObject.Instantiate(balle, Canon.transform.position,Quaternion.Euler(0,0,0));
-            ondes o =g.GetComponent<ondes>();
-            o.direction= targetInput;
-            o.shooter = this.gameObject;
-        }
-  
     }
 
     public void Movement(InputAction.CallbackContext context)

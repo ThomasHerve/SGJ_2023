@@ -335,15 +335,51 @@ MonoBehaviour:
     m_ActionId: f8d76bca-701e-441c-8ca8-5da05fe5fbe5
     m_ActionName: PlayerInput2/Movement[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7564733136217133247}
+        m_TargetAssemblyTypeName: CharacterControler2D, Assembly-CSharp
+        m_MethodName: Movement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a0251447-dd46-4a34-979c-59075bfa83e0
     m_ActionName: PlayerInputManette/Movement
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7564733136217133247}
+        m_TargetAssemblyTypeName: CharacterControler2D, Assembly-CSharp
+        m_MethodName: Target
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 78c66d58-2f11-421a-bd5a-75d13ed33a27
     m_ActionName: PlayerInputManette/Target
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7564733136217133247}
+        m_TargetAssemblyTypeName: CharacterControler2D, Assembly-CSharp
+        m_MethodName: shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7b621f1a-68ad-4fd3-a083-23407856f36e
     m_ActionName: PlayerInputManette/Shoot
   - m_PersistentCalls:
@@ -380,7 +416,7 @@ MonoBehaviour:
     m_ActionName: PlayerInput2/Shoot[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerInput
+  m_DefaultActionMap: PlayerInputManette
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!61 &2158805290121406880
@@ -426,3 +462,4 @@ MonoBehaviour:
   color: white
   knockbackForce: 2
   knockbackDuration: 0.3
+  menuPlayer: {fileID: 0}
