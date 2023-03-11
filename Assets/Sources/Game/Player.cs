@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     [Tooltip("Mutations")]
     public Mutation[] mutations;
-    private Mutation[] currentMutations = new Mutation[2];
+    private Mutation[] currentMutations = new Mutation[2] { new Mutation { index = -1 } , new Mutation { index = -1 } };
 
 
 
@@ -69,21 +69,19 @@ public class Player : MonoBehaviour
                 mutations[num].effectBody.gameObject.SetActive(value);
                 mutations[num].effectArms.gameObject.SetActive(value);
                 break;
+            case 3:
+                corrosion = value;
+                mutations[num].effectBody.gameObject.SetActive(value);
+                mutations[num].effectArms.gameObject.SetActive(value);
+                break;
         }
 
     }
 
     public void RemoveMutation(int num)
     {
-        int index = 0;
-        for(int i = 0; i < mutations.Length; i++)
-        {
-            if(mutations[i].index == num)
-            {
-                index = num;
-            }
-        }
-        SetSwitchMutation(index, false);
+        if (currentMutations[num].index == -1) return;
+        SetSwitchMutation(currentMutations[num].index, false);
         currentMutations[num] = new Mutation { index = -1 }; 
     }
 
@@ -106,7 +104,7 @@ public class Player : MonoBehaviour
     public bool confuse = false;
     public bool sleep = false;
     public bool armor = false;
-
+    public bool corrosion = false;
 
     // Start is called before the first frame update
     void Start()
@@ -122,7 +120,7 @@ public class Player : MonoBehaviour
         SetNextMutationValues();
 
         // DEBUG
-        //AddMutation(2);
+        //AddMutation(3);
     }
 
     // Update is called once per frame
@@ -140,6 +138,9 @@ public class Player : MonoBehaviour
     internal void Reinit()
     {
         vie = 100;
+        SetNextMutationValues();
+        RemoveMutation(0);
+        RemoveMutation(1);
         if (characterControler != null)
         {
             characterControler.isdead = false;

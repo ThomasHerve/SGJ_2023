@@ -164,7 +164,7 @@ public class CharacterControler2D : MonoBehaviour
         startingRotation = transform.rotation;
         float timeElapsed = 0f;
         driftDirection = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
-        while (timeElapsed < 4f && isCoroutineRunning)
+        while (timeElapsed < 7f && isCoroutineRunning)
         {
             timeElapsed += Time.deltaTime;
             // Calculer la direction de dérive en fonction de la direction et de la vitesse
