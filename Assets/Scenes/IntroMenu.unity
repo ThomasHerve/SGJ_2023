@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731715, g: 0.13414735, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1857,8 +1857,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Multiplayer Game\n\nA game made with Unity \nAt Scientific Game Jam Grenoble\n\nGame
-    Designers : \n -\n -\n\nArtists :\n - \n -\n\nDevelopers : \n -\n -\n\nSound
-    Designers :\n - \n -"
+    Designers : \n - Morgan Morlon\n - Etienne Gabert\n\nArtists :\n - Stella Poignet\n\nDevelopers
+    : \n - Benoit Sonzogni\n - Thomas Herve\n\nSound Designer :\n - Fran\xE7ois-Xavier
+    Gros"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

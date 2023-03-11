@@ -11,6 +11,7 @@ TagManager:
   - LobbyReturnBtn
   - EventSystem
   - inputManager
+  - Canvas
   layers:
   - Default
   - TransparentFX
