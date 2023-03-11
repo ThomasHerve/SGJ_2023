@@ -51,8 +51,11 @@ public class Player : MonoBehaviour
     internal void Reinit()
     {
         vie = 100;
-        if(characterControler!=null)
-        characterControler.isdead = false;
+        if (characterControler != null)
+        {
+            characterControler.isdead = false;
+            characterControler.StopC();
+        }
         if (lifebar != null)
             lifebar.SetHealth(vie);
     }
@@ -75,6 +78,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        characterControler.DieAnimation();
         characterControler.isdead = true;
     }
 

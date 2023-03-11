@@ -137,29 +137,40 @@ public class CharacterControler2D : MonoBehaviour
         }
     }
 
+    public void StopC()
+    {
+        StopCoroutine(DriftCoroutine());
+        BoxCollider2D cl = GetComponent<BoxCollider2D>();
+        cl.isTrigger = false;
+        transform.rotation = startingRotation;
+        isCoroutineRunning = false;
+    }
+
     internal void DieAnimation()
     {
         StartCoroutine(DriftCoroutine());
     }
+    private bool isCoroutineRunning = true;
     public GameObject targetObject;
     public Vector3 driftDirection;
-
+    Quaternion startingRotation;
     private IEnumerator DriftCoroutine()
     {
-        Quaternion startingRotation = transform.rotation;
+        isCoroutineRunning = true;
+        BoxCollider2D cl = GetComponent<BoxCollider2D>();
+        cl.isTrigger = true;
+        startingRotation = transform.rotation;
         float timeElapsed = 0f;
-
-        while (timeElapsed < 4f)
+        driftDirection = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
+        while (timeElapsed < 4f && isCoroutineRunning)
         {
             timeElapsed += Time.deltaTime;
-
             // Calculer la direction de dérive en fonction de la direction et de la vitesse
-            Vector3 drift = driftDirection.normalized * 2f * Time.deltaTime;
+            Vector3 drift = driftDirection.normalized * 4f * Time.deltaTime;
 
             // Tourner dans le sens inverse de l'objet cible
-            Quaternion targetRotation = Quaternion.LookRotation(targetObject.transform.position - transform.position);
-            Quaternion inverseRotation = Quaternion.Inverse(targetRotation);
-            transform.rotation = Quaternion.Slerp(startingRotation, inverseRotation, timeElapsed / 4f);
+            Quaternion inverseRotation = Quaternion.Inverse(transform.rotation);
+            transform.Rotate(Vector3.left, 4f);
 
             // Déplacer le GameObject
             transform.position += drift;
@@ -169,6 +180,7 @@ public class CharacterControler2D : MonoBehaviour
 
         // Revenir à la rotation initiale à la fin de la coroutine
         transform.rotation = startingRotation;
+        cl.isTrigger = false;
     }
 
     public void Movement(InputAction.CallbackContext context)
