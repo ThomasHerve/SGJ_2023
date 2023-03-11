@@ -72,10 +72,9 @@ public class Player : MonoBehaviour
 
     internal void changeSkin(Sprite sprite1, Sprite sprite2, Sprite sprite3, Sprite sprite, string v)
     {
-        corps.sprite = sprite1;
         bras.sprite = sprite2;
-        slowCorps.sprite = sprite3;
-        slowBras.sprite = sprite;
+        corps.sprite = sprite1;
+        //slowBras.sprite = sprite;
         color = v;
     }
 }

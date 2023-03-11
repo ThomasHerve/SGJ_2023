@@ -657,6 +657,10 @@ PrefabInstance:
       propertyPath: Menu.Array.data[3]
       value: 
       objectReference: {fileID: 1214417094}
+    - target: {fileID: 56976866955923768, guid: b94954de9f54c0d40a850e7892748bb7, type: 3}
+      propertyPath: sprtBras.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e2503a91adf12d4d804c241f881731c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b94954de9f54c0d40a850e7892748bb7, type: 3}
 --- !u!1 &148810913

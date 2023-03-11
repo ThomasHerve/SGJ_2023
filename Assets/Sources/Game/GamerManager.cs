@@ -31,17 +31,19 @@ public class GamerManager : MonoBehaviour
     void Start()
     {
         // DEBUG
-        //if (PlayerInstance.players[0] == null)
-        //{
-
-        //    PlayerInstance.players[0] = new PlayerInstance();
-        //    PlayerInstance.players[0].InputDevice = Keyboard.current;
-        //    PlayerInstance.players[1] = new PlayerInstance();
-        //    PlayerInstance.players[1].InputDevice = Keyboard.current;
-        //    PlayerInstance.players[2] = new PlayerInstance();
-        //    PlayerInstance.players[2].InputDevice = Gamepad.current;
-        //}
-        //
+        if (PlayerInstance.currentPlayerNumber == 0)
+        {
+            PlayerInstance.players[0] = new PlayerInstance();
+            PlayerInstance.players[0].InputDevice = Keyboard.current;
+            PlayerInstance.players[0].skin = 0;
+            PlayerInstance.players[1] = new PlayerInstance();
+            PlayerInstance.players[1].InputDevice = Keyboard.current;
+            PlayerInstance.players[1].skin = 1;
+            PlayerInstance.players[2] = new PlayerInstance();
+            PlayerInstance.players[2].InputDevice = Gamepad.current;
+            PlayerInstance.players[2].skin = 2;
+        }
+        
 
         int i = 0;
         playerInputManager = GameObject.FindGameObjectWithTag("inputManager").GetComponent<PlayerInputManager>();
