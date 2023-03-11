@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,12 @@ public class Player : MonoBehaviour
     public string color = "red";
     public int mutationMin = 30;
     public int mutationMax = 49;
+    [Tooltip("Valeurs mutation")]
+    public int healMutationValue;
+    public int spikesDamage;
+    public float armorReduction;
+    public float corrosionMultiplier;
+
 
     // Mutation values
     private int mutationCurrentValue = 0;
@@ -33,7 +40,7 @@ public class Player : MonoBehaviour
 
     [Tooltip("Mutations")]
     public Mutation[] mutations;
-    private Mutation[] currentMutations = new Mutation[2];
+    private Mutation[] currentMutations = new Mutation[2] { new Mutation { index = -1 } , new Mutation { index = -1 } };
 
 
 
@@ -69,21 +76,27 @@ public class Player : MonoBehaviour
                 mutations[num].effectBody.gameObject.SetActive(value);
                 mutations[num].effectArms.gameObject.SetActive(value);
                 break;
+            case 3:
+                corrosion = value;
+                mutations[num].effectBody.gameObject.SetActive(value);
+                mutations[num].effectArms.gameObject.SetActive(value);
+                break;
+            case 4:
+                mutations[num].effectBody.gameObject.SetActive(value);
+                if(value)StartCoroutine(HealMutation(num));
+                break;
+            case 5:
+                spikes = value;
+                mutations[num].effectBody.gameObject.SetActive(value);
+                break;
         }
 
     }
 
     public void RemoveMutation(int num)
     {
-        int index = 0;
-        for(int i = 0; i < mutations.Length; i++)
-        {
-            if(mutations[i].index == num)
-            {
-                index = num;
-            }
-        }
-        SetSwitchMutation(index, false);
+        if (currentMutations[num].index == -1) return;
+        SetSwitchMutation(currentMutations[num].index, false);
         currentMutations[num] = new Mutation { index = -1 }; 
     }
 
@@ -106,7 +119,22 @@ public class Player : MonoBehaviour
     public bool confuse = false;
     public bool sleep = false;
     public bool armor = false;
+    public bool corrosion = false;
+    public bool spikes = false;
 
+    // Mutation functions
+    System.Collections.IEnumerator HealMutation(int num)
+    {
+        Heal(healMutationValue);
+        yield return new WaitForSeconds(2);
+        RemoveMutation(0);
+        RemoveMutation(1);
+    }
+
+    [SerializeField]
+    AudioClip[] voiceClips;
+
+    bool isVoicePlaying = false;
 
     // Start is called before the first frame update
     void Start()
@@ -122,7 +150,7 @@ public class Player : MonoBehaviour
         SetNextMutationValues();
 
         // DEBUG
-        //AddMutation(2);
+        //AddMutation(5);
     }
 
     // Update is called once per frame
@@ -140,6 +168,9 @@ public class Player : MonoBehaviour
     internal void Reinit()
     {
         vie = 100;
+        SetNextMutationValues();
+        RemoveMutation(0);
+        RemoveMutation(1);
         if (characterControler != null)
         {
             characterControler.isdead = false;
@@ -151,10 +182,24 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (armor) damage = Mathf.FloorToInt(armorReduction * damage);
+        if (corrosion) damage = Mathf.FloorToInt(corrosionMultiplier * damage);
         vie -= damage;
         if (vie < 0) { vie = 0;}
         if (vie == 0) Die();
         lifebar.SetHealth(vie);
+        if (!isVoicePlaying)
+        {
+            isVoicePlaying = true;
+            GetComponent<AudioSource>().PlayOneShot(voiceClips[UnityEngine.Random.Range(0, voiceClips.Length)]);
+            StartCoroutine(WaitDelayForVoice(6f));
+        }
+    }
+
+    IEnumerator WaitDelayForVoice(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isVoicePlaying = false;
     }
 
     public void TakeMutation(int value)
@@ -169,14 +214,15 @@ public class Player : MonoBehaviour
                     
             }
             AddMutation(indexs[Random.Range(0, indexs.Count)]);
+            //AddMutation(3);
         }
     }
-    
-    public void TakeDamage(int damage,GameObject shooter)
+
+    public void Heal(int value)
     {
-        vie -= damage;
-        if (vie < 0) { vie = 0; }
-        if (vie == 0) Die();
+        if(vie <= 0) return;
+        if (vie + value >= 100) vie = 100;
+        else vie += value;
         lifebar.SetHealth(vie);
     }
 

@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class CharacterControler2D : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
-
+    private Player player;
 
     private Vector2 movementInput, targetInput, influence;
     public bool isdead;
@@ -38,6 +38,7 @@ public class CharacterControler2D : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRendererBras = PivotBras.GetComponentInChildren<SpriteRenderer>();
         isdead = false;
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -48,12 +49,12 @@ public class CharacterControler2D : MonoBehaviour
             Vector2 vel;
             if (influence != Vector2.zero)
             {
-                vel = influence * Time.deltaTime * speed;
+                vel = influence * Time.deltaTime * GetSpeed();
                 transform.Find("JetPack").GetComponent<SoundFade>().FadeOut();
             }
             else
             {
-                vel = movementInput * Time.deltaTime * speed;
+                vel = movementInput * Time.deltaTime * GetSpeed();
                 if (movementInput == Vector2.zero)
                     transform.Find("JetPack").GetComponent<SoundFade>().FadeOut();
             }
@@ -116,7 +117,7 @@ public class CharacterControler2D : MonoBehaviour
                 GameObject g = GameObject.Instantiate(balle, new Vector3(Canon.transform.position.x, Canon.transform.position.y,1), Quaternion.Euler(0, 0, 0));
                 g.transform.SetParent(gameObject.transform);
                 ondes o = g.GetComponent<ondes>();
-                GetComponent<AudioSource>().PlayOneShot(shootClip);
+                transform.Find("Pivot Bras").GetComponent<AudioSource>().PlayOneShot(shootClip);
 
                 if (!isKeyboard)
                 {
@@ -137,6 +138,20 @@ public class CharacterControler2D : MonoBehaviour
                 o.shooter = this.gameObject;
             }
         }
+    }
+
+    public float GetSpeed()
+    {
+        float returnSpeed = speed;
+        if(player.spikes)
+        {
+            returnSpeed *= 0.9f;
+        }
+        if (player.sleep)
+        {
+            returnSpeed *= 0.5f;
+        }
+        return returnSpeed;
     }
 
     public void StopC()
@@ -164,7 +179,7 @@ public class CharacterControler2D : MonoBehaviour
         startingRotation = transform.rotation;
         float timeElapsed = 0f;
         driftDirection = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
-        while (timeElapsed < 4f && isCoroutineRunning)
+        while (timeElapsed < 7f && isCoroutineRunning)
         {
             timeElapsed += Time.deltaTime;
             // Calculer la direction de dérive en fonction de la direction et de la vitesse
@@ -213,5 +228,14 @@ public class CharacterControler2D : MonoBehaviour
         influence = direction;
         yield return new WaitForSeconds(duration);
         influence = Vector2.zero;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(player.spikes && other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<Player>().TakeDamage(player.spikesDamage);
+            other.gameObject.GetComponent<Player>().Knockback(new Vector2(transform.position.x, transform.position.y));
+        }
     }
 }
