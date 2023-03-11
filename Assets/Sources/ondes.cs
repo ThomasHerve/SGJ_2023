@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ondes : MonoBehaviour
 {
-    public static int resolution = 500;
+    public static int resolution = 200;
     public float flightDuration = 0.8f;
     public float deadTime = 10;
     private Vector3[] linePoints = new Vector3[resolution];
     private Vector2[] linePoints2 = new Vector2[resolution];
+    private Vector2[] linePointTotal = new Vector2[resolution];
     private float[] deltafloat = new float[resolution];
     private float xStartPosition,yStartPosition;
     public Vector2 direction;
@@ -19,8 +22,11 @@ public class ondes : MonoBehaviour
     private LineRenderer lineRenderer;
     private EdgeCollider2D collider2D;
     private float currentTime = 0;
+    private Collider2D otherObject;
     public GameObject shooter;
 
+    private bool first = true;
+    private float distance;
 
     private bool interrupted = false;
     // Start is called before the first frame update
@@ -51,39 +57,21 @@ public class ondes : MonoBehaviour
         int index = Mathf.FloorToInt(currentTime / flightDuration * resolution);
         if (index >= resolution)
             GameObject.Destroy(this.gameObject);
-        //if (interrupted)
-        //    return;
-        RenderLine(resolution);
-        /*
-        for (i = 0; i/1000f < previoustime - startTime; i++)
+        if (interrupted)
         {
-            float height = GetProjectileHeight(i);
-            if (direction.y >= 0.5) {
-                linePoints[i] = new Vector3(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y  , 0);
-                linePoints2[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
-            }
-            else
-            {
-                linePoints[i] = new Vector3(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i], 0);
-                linePoints2[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
-            }
-        }
-        for (int j = i; j < resolution ; j++)
+            
+            RenderLineCut();
+
+        } else
         {
-            float height = GetProjectileHeight(i);
-            linePoints[j] = new Vector3(transform.position.x + (direction * height).x , transform.position.y + (direction * height).y, 0);
-            linePoints2[j] = new Vector2((direction * height).x, (direction * height).y);
+            RenderLine(resolution, true);
         }
-        lineRenderer.positionCount = resolution;
-        lineRenderer.SetPositions(linePoints);
-        collider2D.SetPoints(new List<Vector2>(linePoints2));
-        */
     }
 
-    private void RenderLine(int position)
+    private void RenderLine(int position, bool hitbox)
     {
         linePoints = new Vector3[position];
-        linePoints2 = new Vector2[position];
+        if(hitbox)linePoints2 = new Vector2[position];
 
         for (int i = 0; i < position; i++)
         {
@@ -91,28 +79,47 @@ public class ondes : MonoBehaviour
             if (direction.y >= 0.5)
             {
                 linePoints[i] = new Vector3(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y, 0);
-                linePoints2[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
+                if (hitbox) linePoints2[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
+                if (first) linePointTotal[i] = new Vector2(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y);
             }
             else
             {
                 linePoints[i] = new Vector3(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i], 0);
-                linePoints2[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
+                if (hitbox) linePoints2[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
+                if (first) linePointTotal[i] = new Vector2(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i]);
             }
         }
+        first = false;
         lineRenderer.positionCount = position;
         lineRenderer.SetPositions(linePoints);
-        collider2D.SetPoints(new List<Vector2>(linePoints2));
+        if (hitbox)collider2D.SetPoints(new List<Vector2>(linePoints2));
+    }
+
+    private void RenderLineCut()
+    {
+        int i = 0;
+        for (i = 0; i < resolution; i++)
+        {
+            if (Vector2.Distance(new Vector2(linePointTotal[0].x, linePointTotal[0].y), linePointTotal[i]) > distance)
+            {
+                break;
+            }
+        }
+        RenderLine(i, false);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other);
         if(other.gameObject != shooter)
         {
-            interrupted = true;
-            if (other.tag == "Player")
+            otherObject = other;
+            distance = Vector2.Distance(new Vector2(linePointTotal[0].x, linePointTotal[0].y), other.gameObject.transform.position);
+            if (other.tag == "Player" && !interrupted)
             {
-                other.GetComponent<Player>();
+                other.GetComponent<Player>().TakeDamage(50);
             }
+            interrupted = true;
         }
     }
 

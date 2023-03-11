@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 478462844}
   - component: {fileID: 478462843}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Bras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478462841}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.128, y: -0.072, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 4.24, y: 0.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 977519970}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b4bfcd0d300e1514d8f28cdf6e62bb68, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e2503a91adf12d4d804c241f881731c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 1
+  m_SpriteSortPoint: 0
 --- !u!1 &977519969
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 977519970}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977519969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.61, y: 0, z: 0}
+  m_LocalPosition: {x: 4.71, y: 0.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -140,7 +140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584563509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.508, y: 0.402, z: 0}
+  m_LocalPosition: {x: -0.947, y: 0.713, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -323,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 7564733136217133244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1584563510}
@@ -364,10 +364,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3c895c405bbbc49b77c38f73296953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isdead: 0
   PivotBras: {fileID: 1584563509}
   Canon: {fileID: 977519969}
   balle: {fileID: 1129396168883762450, guid: 423cdfa2d21076042a671ee272c5d35f, type: 3}
   speed: 300
+  shootCD: 1.1
   high: 0
   shootClip: {fileID: 8300000, guid: ac68bd9ef5b631545b984e0a78be4e32, type: 3}
   isKeyboard: 0
@@ -412,12 +414,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0092c23f503fc4841b9acd25e25e2dd4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7876b4de6dd11604d8a707d9de8f77d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.9, y: 2.22}
+  m_Size: {x: 1.32, y: 3.21}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -578,18 +580,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.1374861, y: 0.06304741}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.31, y: 6.75}
-    newSize: {x: 2.9, y: 2.22}
+    oldSize: {x: 5.5, y: 13.4}
+    newSize: {x: 1.32, y: 3.21}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.31, y: 6.75}
+  m_Size: {x: 5.7836037, y: 13.410645}
   m_EdgeRadius: 0
 --- !u!114 &8135898538985018722
 MonoBehaviour:
@@ -609,6 +611,10 @@ MonoBehaviour:
   knockbackForce: 2
   knockbackDuration: 0.3
   menuPlayer: {fileID: 0}
+  corps: {fileID: 7564733136217133217}
+  bras: {fileID: 478462843}
+  slowCorps: {fileID: 7564733136217133217}
+  slowBras: {fileID: 478462843}
 --- !u!82 &-2458671708955766601
 AudioSource:
   m_ObjectHideFlags: 0

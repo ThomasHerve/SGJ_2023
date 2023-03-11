@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2362083238733219679}
   - component: {fileID: 7406430463086531552}
   - component: {fileID: 8885451581595727083}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e20d238fa1bb04da64bc47431f3eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flightDuration: 0.8
+  flightDuration: 0.3
   deadTime: 3
   direction: {x: 0, y: 0}
   directionCur: {x: 0, y: 0}
