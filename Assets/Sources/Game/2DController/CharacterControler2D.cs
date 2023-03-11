@@ -22,6 +22,10 @@ public class CharacterControler2D : MonoBehaviour
     [SerializeField]
     private float high ;
 
+    [SerializeField]
+    AudioClip shootClip;
+
+
     public bool isKeyboard = false;
 
     // Start is called before the first frame update
@@ -41,10 +45,13 @@ public class CharacterControler2D : MonoBehaviour
             if (influence != Vector2.zero)
             {
                 vel = influence * Time.deltaTime * speed;
+                transform.Find("JetPack").GetComponent<SoundFade>().FadeOut();
             }
             else
             {
                 vel = movementInput * Time.deltaTime * speed;
+                if (movementInput == Vector2.zero)
+                    transform.Find("JetPack").GetComponent<SoundFade>().FadeOut();
             }
             rigidbody.velocity = vel;
 
@@ -103,6 +110,7 @@ public class CharacterControler2D : MonoBehaviour
     public void Movement(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+        transform.Find("JetPack").GetComponent<SoundFade>().FadeIn();
     }
 
     public void Target(InputAction.CallbackContext context)
@@ -114,6 +122,7 @@ public class CharacterControler2D : MonoBehaviour
     public void shoot(InputAction.CallbackContext context)
     {
         shootInput = context.ReadValueAsButton();
+        GetComponent<AudioSource>().PlayOneShot(shootClip);
     }
 
     public void AddForce(Vector2 direction, float duration)
