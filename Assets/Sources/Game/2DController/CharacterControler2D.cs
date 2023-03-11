@@ -40,7 +40,6 @@ public class CharacterControler2D : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(isdead);
         if (!isdead)
         {
             Vector2 vel;
