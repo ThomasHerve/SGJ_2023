@@ -38,13 +38,16 @@ public class Player : MonoBehaviour
     {
         switch (mutations[num].index)
         {
-            case 1:
+            case 0:
                 confuse = value;
+                mutations[num].effect.gameObject.SetActive(value);
                 break;
-            case 2:
+            case 1:
                 sleep = value;
+                mutations[num].effect.gameObject.SetActive(value);
                 break;
         }
+
     }
 
     public void RemoveMutation(int num)
@@ -71,10 +74,6 @@ public class Player : MonoBehaviour
                 num = 1;
             currentMutations[num] = mutations[index];
 
-            // Application graphique
-
-
-
             // Switch mutation
             SetSwitchMutation(index, true);
         }
@@ -98,6 +97,8 @@ public class Player : MonoBehaviour
         currentMutations[0] = new Mutation { index = -1 };
         currentMutations[1] = new Mutation { index = -1 };
 
+        // DEBUG
+        AddMutation(0);
     }
 
     // Update is called once per frame

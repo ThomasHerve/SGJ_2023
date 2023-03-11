@@ -58,7 +58,7 @@ public class CharacterControler2D : MonoBehaviour
             }
             rigidbody.velocity = vel;
 
-            if (transform.childCount > 2)
+            if (transform.Find("projectile(Clone)") != null)
             {
                 return;
             }
@@ -138,6 +138,7 @@ public class CharacterControler2D : MonoBehaviour
     public void Movement(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+        if (GetComponent<Player>().confuse) movementInput *= -1;
         transform.Find("JetPack").GetComponent<SoundFade>().FadeIn();
     }
 
