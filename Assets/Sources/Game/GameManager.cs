@@ -39,10 +39,6 @@ public class GameManager : MonoBehaviour
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         StartGame();
 
-        //DEBUG A DEGAGER
-        players.Add(new Player());
-        players.Add(new Player());
-
     }
 
     void StartGame()
