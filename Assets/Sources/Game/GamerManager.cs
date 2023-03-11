@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.MultiPlayerGame.Shared;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,7 +26,7 @@ public class GamerManager : MonoBehaviour
     private List<Sprite> sprtSlowBras;
     [SerializeField]
     private GameManager gm;
-    private string[] Colorskin = new string[4] { "rouge", "orange", "vert", "bleu" };
+    private string[] Colorskin = new string[4] { "Rouge", "Orange", "Vert", "Bleu" };
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +60,16 @@ public class GamerManager : MonoBehaviour
                 player.GetComponent<CharacterControler2D>().isKeyboard = true;
                 playerComp = player.GetComponent<Player>();
                 playerComp.menuPlayer = Menu[i];
-                gm.players.Add(playerComp);
+                    Menu[i].GetComponentInChildren<TextMeshProUGUI>().text = Colorskin[i];
+                    if (Colorskin[i] == "Rouge")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                    else if (Colorskin[i] == "Orange")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = new Color(1f, 0.5f, 0f, 1f);
+                    else if (Colorskin[i] == "Vert")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+                    else if (Colorskin[i] == "Bleu")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
+                    gm.players.Add(playerComp);
                 playerComp.changeSkin(sprtCorps[p.skin], sprtBras[p.skin], sprtSlowCorps[p.skin], sprtSlowBras[i],Colorskin[i]);
                 keyboardTaken = true;
             }
@@ -70,6 +80,15 @@ public class GamerManager : MonoBehaviour
                 player.GetComponent<CharacterControler2D>().isKeyboard = true;
                 playerComp = player.GetComponent<Player>();
                 playerComp.menuPlayer = Menu[i];
+                    Menu[i].GetComponentInChildren<TextMeshProUGUI>().text = Colorskin[i];
+                    if (Colorskin[i] == "Rouge")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                    else if (Colorskin[i] == "Orange")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = new Color(1f, 0.5f, 0f, 1f);
+                    else if (Colorskin[i] == "Vert")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+                    else if (Colorskin[i] == "Bleu")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
                     playerComp.changeSkin(sprtCorps[p.skin], sprtBras[p.skin], sprtSlowCorps[p.skin], sprtSlowBras[i], Colorskin[i]);
                     gm.players.Add(playerComp);
                 keyboardTaken = true;
@@ -78,7 +97,16 @@ public class GamerManager : MonoBehaviour
             {
                 GameObject player = playerInputManager.JoinPlayer(i, -1, "Gamepad", p.InputDevice).gameObject;
                 playerComp = player.GetComponent<Player>();
-                playerComp.menuPlayer = Menu[i];
+                    Menu[i].GetComponentInChildren<TextMeshProUGUI>().text = Colorskin[i];
+                    if (Colorskin[i] == "Rouge")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                    else if (Colorskin[i] == "Orange")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = new Color(1f, 0.5f, 0f, 1f);
+                    else if (Colorskin[i] == "Vert")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+                    else if (Colorskin[i] == "Bleu")
+                        Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
+                    playerComp.menuPlayer = Menu[i];
                     playerComp.changeSkin(sprtCorps[p.skin], sprtBras[p.skin], sprtSlowCorps[p.skin], sprtSlowBras[p.skin], Colorskin[p.skin]);
                     gm.players.Add(playerComp);
                 }
