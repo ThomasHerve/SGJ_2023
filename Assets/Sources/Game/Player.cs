@@ -34,6 +34,15 @@ public class Player : MonoBehaviour
     private Mutation[] currentMutations = new Mutation[2];
 
 
+
+    public void RevertAllmutations()
+    {
+        foreach (Mutation mutation in mutations)
+        {
+            mutation.effect.transform.rotation = Quaternion.Euler(0, transform.rotation.z, 0);
+        }
+    }
+
     void SetSwitchMutation(int num, bool value)
     {
         switch (mutations[num].index)
@@ -98,7 +107,7 @@ public class Player : MonoBehaviour
         currentMutations[1] = new Mutation { index = -1 };
 
         // DEBUG
-        AddMutation(0);
+        AddMutation(1);
     }
 
     // Update is called once per frame

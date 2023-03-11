@@ -87,6 +87,7 @@ public class CharacterControler2D : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                     spriteRendererBras.gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0, 0, 0);
+                    GetComponent<Player>().RevertAllmutations();
                     PivotBras.transform.rotation = Quaternion.Euler(0, 0, 0);
                     isRight = true;
                 }
@@ -95,6 +96,7 @@ public class CharacterControler2D : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0, 180, 0);
                     spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, -180);
                     spriteRendererBras.gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0, 180, 0);
+                    GetComponent<Player>().RevertAllmutations();
                     PivotBras.transform.rotation = Quaternion.Euler(0, 0, 180);
                     isRight = false;
                 }
