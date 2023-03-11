@@ -11,11 +11,6 @@ namespace Unity.MultiPlayerGame.Menu
 
         void Update()
         {
-            if (EventSystem.current.currentSelectedGameObject == gameObject
-                && Input.GetButtonDown(GameConstants.k_ButtonNameSubmit))
-            {
-                LoadTargetScene();
-            }
         }
 
         public void LoadTargetScene()

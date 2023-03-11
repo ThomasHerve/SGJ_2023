@@ -10,6 +10,7 @@ TagManager:
   - PlayerPlaceHolder3
   - LobbyReturnBtn
   - EventSystem
+  - inputManager
   layers:
   - Default
   - TransparentFX
