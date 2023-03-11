@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ondes : MonoBehaviour
 {
-    public static int resolution = 10000;
-    public float flightDuration = 300;
+    public static int resolution = 500;
+    public float flightDuration = 0.8f;
     public float deadTime = 10;
     private Vector3[] linePoints = new Vector3[resolution];
     private Vector2[] linePoints2 = new Vector2[resolution];
@@ -16,8 +18,11 @@ public class ondes : MonoBehaviour
     public float horizontalVelocity = 1;
     private LineRenderer lineRenderer;
     private EdgeCollider2D collider2D;
-    private float previoustime,startTime;
+    private float currentTime = 0;
     public GameObject shooter;
+
+
+    private bool interrupted = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +31,6 @@ public class ondes : MonoBehaviour
         if (direction == Vector2.zero) direction = new Vector2(1f, 0f);
         lineRenderer = GetComponent<LineRenderer>();
         collider2D = GetComponent<EdgeCollider2D>();
-        startTime = Time.time;
         for (int i = 0;i < resolution; i++)
         {
             if( i== 0)
@@ -37,22 +41,23 @@ public class ondes : MonoBehaviour
             else
                 deltafloat[i] += deltafloat[i - 1] + Random.Range(-0.0001f * i * 5, 0.0001f * i * 5);
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - startTime > 0.8f)
+        currentTime += Time.deltaTime;
+        int index = Mathf.FloorToInt(currentTime / flightDuration * resolution);
+        if (index >= resolution)
             GameObject.Destroy(this.gameObject);
-        int i = 0;
-        previoustime = Time.time;
-        float timeStep = flightDuration / resolution;
+        //if (interrupted)
+        //    return;
+        RenderLine(resolution);
+        /*
         for (i = 0; i/1000f < previoustime - startTime; i++)
         {
-            float time = i * timeStep;
             float height = GetProjectileHeight(i);
-            float tx = (direction * height).x;
-            float ty = (direction * height).y;
             if (direction.y >= 0.5) {
                 linePoints[i] = new Vector3(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y  , 0);
                 linePoints2[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
@@ -66,10 +71,35 @@ public class ondes : MonoBehaviour
         for (int j = i; j < resolution ; j++)
         {
             float height = GetProjectileHeight(i);
-            linePoints[j] = new Vector3(transform.position.x + (direction * height).x , transform.position.y + (direction * height).y +constY, 0);
+            linePoints[j] = new Vector3(transform.position.x + (direction * height).x , transform.position.y + (direction * height).y, 0);
             linePoints2[j] = new Vector2((direction * height).x, (direction * height).y);
         }
         lineRenderer.positionCount = resolution;
+        lineRenderer.SetPositions(linePoints);
+        collider2D.SetPoints(new List<Vector2>(linePoints2));
+        */
+    }
+
+    private void RenderLine(int position)
+    {
+        linePoints = new Vector3[position];
+        linePoints2 = new Vector2[position];
+
+        for (int i = 0; i < position; i++)
+        {
+            float height = GetProjectileHeight(i);
+            if (direction.y >= 0.5)
+            {
+                linePoints[i] = new Vector3(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y, 0);
+                linePoints2[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
+            }
+            else
+            {
+                linePoints[i] = new Vector3(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i], 0);
+                linePoints2[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
+            }
+        }
+        lineRenderer.positionCount = position;
         lineRenderer.SetPositions(linePoints);
         collider2D.SetPoints(new List<Vector2>(linePoints2));
     }
@@ -78,29 +108,27 @@ public class ondes : MonoBehaviour
     {
         if(other.gameObject != shooter)
         {
+            interrupted = true;
             if (other.tag == "Player")
             {
                 other.GetComponent<Player>().TakeDamage(10);
             }
-
         }
     }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject != shooter)
+        {
+            interrupted = false;
+        }
+    }
+
 
     float GetProjectileHeight(float t)
     {
             return t * 0.1f;
     }
-    float constX=0, constY=0;
-    float deltax()
-    {
-        constX += Random.Range(-10f, 10f);
-        return constX;
-    }
 
-    float deltay()
-    {
-        constY += Random.Range(-10f, 10f);
-        return constY;
-    }
 }
 

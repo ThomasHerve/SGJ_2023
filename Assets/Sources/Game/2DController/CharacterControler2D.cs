@@ -22,6 +22,7 @@ public class CharacterControler2D : MonoBehaviour
     private float high ;
 
     public bool isKeyboard = false;
+    private bool isRight = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -44,7 +45,10 @@ public class CharacterControler2D : MonoBehaviour
         }
         rigidbody.velocity = vel;
 
-
+        if(transform.childCount > 1)
+        {
+            return;
+        }
         // flip du sprite 
         if(!isKeyboard)
         {
@@ -69,6 +73,7 @@ public class CharacterControler2D : MonoBehaviour
                 spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                 spriteRendererBras.gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0, 0, 0);
                 PivotBras.transform.rotation = Quaternion.Euler(0, 0, 0);
+                isRight = true;
             }
             else if (movementInput.x < 0)
             {
@@ -76,6 +81,7 @@ public class CharacterControler2D : MonoBehaviour
                 spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, -180);
                 spriteRendererBras.gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0, 180, 0);
                 PivotBras.transform.rotation = Quaternion.Euler(0, 0, 180);
+                isRight = false;
             }
         }
         else
@@ -88,9 +94,25 @@ public class CharacterControler2D : MonoBehaviour
         {
             cd = Time.time;
             //Tirer
-            GameObject g=  GameObject.Instantiate(balle, Canon.transform.position,Quaternion.Euler(0,0,0));
+            GameObject g =  GameObject.Instantiate(balle, Canon.transform.position,Quaternion.Euler(0,0,0));
+            g.transform.SetParent(gameObject.transform);
             ondes o =g.GetComponent<ondes>();
-            o.direction= targetInput;
+            if(!isKeyboard)
+            {
+                o.direction = targetInput;
+            }
+            else
+            {
+                if(isRight)
+                {
+                    o.direction = Vector2.right;
+                }
+                else
+                {
+                    o.direction = Vector2.left;
+                }
+            }
+            
             o.shooter = this.gameObject;
         }
   
