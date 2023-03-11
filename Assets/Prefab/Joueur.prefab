@@ -541,7 +541,7 @@ MonoBehaviour:
   speed: 300
   shootCD: 1.1
   high: 0
-  shootClip: {fileID: 8300000, guid: ac68bd9ef5b631545b984e0a78be4e32, type: 3}
+  shootClip: {fileID: 8300000, guid: eef4db7ff739e8e43aa10ce280517eb7, type: 3}
   isKeyboard: 0
 --- !u!212 &7564733136217133217
 SpriteRenderer:
