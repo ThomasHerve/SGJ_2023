@@ -4,14 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PlayerPlaceHolder0
+  - GameManager
+  - Canvas
   - PlayerPlaceHolder1
+  - PlayerPlaceHolder0
+  - EventSystem
   - PlayerPlaceHolder2
   - PlayerPlaceHolder3
-  - LobbyReturnBtn
-  - EventSystem
   - inputManager
-  - Canvas
   layers:
   - Default
   - TransparentFX
@@ -19,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Obstacle
   - 
   - 
   - 

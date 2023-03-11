@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +8,27 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    [Tooltip("Gameobjects references")]
+    [SerializeField]
+    GameObject[] obstacles;
+
+    [SerializeField]
+    Transform[] axisLeft;
+    [SerializeField]
+    Transform[] axisUp;
+    [SerializeField]
+    Transform[] axisRight;
+    [SerializeField]
+    Transform[] axisDown;
+
+    [Tooltip("Game data")]
+    [SerializeField]
+    float minSpawnTime;
+    [SerializeField]
+    float maxSpawnTime;
+
+    private GameState gameState;
 
     List<Player> players = Enumerable.Range(0, PlayerInstance.currentPlayerNumber).Select(i => new Player()).ToList();
     public GameObject canvas;
@@ -65,4 +85,74 @@ public class GameManager : MonoBehaviour
         canvas.GetComponent<TextSlowWrite>().WriteText(canvas.transform.Find("EndGame").Find("Score").GetComponent<TextMeshProUGUI>(), scoreStr.ToString() );
 
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (gameState)
+        {
+            case GameState.START:
+                gameState = GameState.RUNNING;
+                break;
+            case GameState.RUNNING:
+                GameRun();
+                break;
+            case GameState.END:
+                break;
+        }
+    }
+
+
+    private float obstacleSpawnTime = 0;
+    private float currentObstacleSpawnTime = 0;
+    private void GameRun()
+    {
+        if (obstacleSpawnTime <= currentObstacleSpawnTime)
+        {
+            currentObstacleSpawnTime = 0;
+            obstacleSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);
+            SpawnObstacle();
+        }
+        else
+        {
+            currentObstacleSpawnTime += Time.deltaTime;
+        }
+    }
+
+    private void SpawnObstacle()
+    {
+        // Find position
+        int side = Random.Range(0, 4);
+        Vector2 pos = Vector2.zero;
+        Vector2 dest = Vector2.zero;
+        switch (side)
+        {
+            case (0):
+                pos = new Vector2(Random.Range(axisLeft[0].position.x, axisLeft[1].position.x), Random.Range(axisLeft[0].position.y, axisLeft[1].position.y));
+                dest = new Vector2(Random.Range(axisRight[0].position.x, axisRight[1].position.x), Random.Range(axisRight[0].position.y, axisRight[1].position.y));
+                break;
+            case (1):
+                pos = new Vector2(Random.Range(axisUp[0].position.x, axisUp[1].position.x), Random.Range(axisUp[0].position.y, axisUp[1].position.y));
+                dest = new Vector2(Random.Range(axisDown[0].position.x, axisDown[1].position.x), Random.Range(axisDown[0].position.y, axisDown[1].position.y));
+                break;
+            case (2):
+                pos = new Vector2(Random.Range(axisRight[0].position.x, axisRight[1].position.x), Random.Range(axisRight[0].position.y, axisRight[1].position.y));
+                dest = new Vector2(Random.Range(axisLeft[0].position.x, axisLeft[1].position.x), Random.Range(axisLeft[0].position.y, axisLeft[1].position.y));
+                break;
+            case (3):
+                pos = new Vector2(Random.Range(axisDown[0].position.x, axisDown[1].position.x), Random.Range(axisDown[0].position.y, axisDown[1].position.y));
+                dest = new Vector2(Random.Range(axisUp[0].position.x, axisUp[1].position.x), Random.Range(axisUp[0].position.y, axisUp[1].position.y));
+                break;
+        }
+        Instantiate(obstacles[Random.Range(0, obstacles.Length)], pos, Quaternion.identity).GetComponent<Obstacle>().setup(dest - pos);
+    }
+
+}
+
+
+enum GameState
+{
+    START,
+    RUNNING,
+    END
 }

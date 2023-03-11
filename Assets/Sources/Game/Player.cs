@@ -20,4 +20,9 @@ public class Player : MonoBehaviour
     {
         
     }
+
+    public void Knockback(Vector2 other)
+    {
+
+    }
 }
