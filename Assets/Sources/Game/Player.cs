@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         SetNextMutationValues();
 
         // DEBUG
-        AddMutation(2);
+        //AddMutation(2);
     }
 
     // Update is called once per frame
