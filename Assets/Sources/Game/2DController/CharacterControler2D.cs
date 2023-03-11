@@ -51,7 +51,9 @@ public class CharacterControler2D : MonoBehaviour
             cd = Time.time;
             //Tirer
             GameObject g=  GameObject.Instantiate(balle, Canon.transform.position,Quaternion.Euler(0,0,0));
-            g.GetComponent<ondes>().direction= targetInput;
+            ondes o =g.GetComponent<ondes>();
+            o.direction= targetInput;
+            o.shooter = this.gameObject;
         }
   
     }
