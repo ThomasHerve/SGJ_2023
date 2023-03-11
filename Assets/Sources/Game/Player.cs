@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 
     public int vie = 100;
     public int score = 0;
-    public string color = "white";
+    public string color = "red";
 
     [SerializeField]
     private float knockbackForce;
@@ -18,6 +18,14 @@ public class Player : MonoBehaviour
     private CharacterControler2D characterControler;
     public GameObject menuPlayer;
     private LifeBar lifebar;
+    [SerializeField]
+    private SpriteRenderer corps;
+    [SerializeField]
+    private SpriteRenderer bras;
+    [SerializeField]
+    private SpriteRenderer slowCorps;
+    [SerializeField]
+    private SpriteRenderer slowBras;
 
     // Start is called before the first frame update
     void Start()
@@ -60,5 +68,14 @@ public class Player : MonoBehaviour
     private void Die()
     {
         characterControler.isdead = true;
+    }
+
+    internal void changeSkin(Sprite sprite1, Sprite sprite2, Sprite sprite3, Sprite sprite, string v)
+    {
+        corps.sprite = sprite1;
+        bras.sprite = sprite2;
+        slowCorps.sprite = sprite3;
+        slowBras.sprite = sprite;
+        color = v;
     }
 }

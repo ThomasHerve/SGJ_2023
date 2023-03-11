@@ -40,7 +40,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 56976866955923749}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
@@ -91,3 +91,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyboard1: {fileID: -944628639613478452, guid: 241e72d8258c45046ab08a5eb3a4e2d3, type: 3}
   keyboard2: {fileID: -944628639613478452, guid: 6e64da0d8a0d60a4393f2ba74b23567d, type: 3}
+  Menu:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  player: {fileID: 7564733136217133244, guid: 7500ed5ab2db10a4dbbf2dc08e70bbea, type: 3}
+  sprtBras:
+  - {fileID: 21300000, guid: b4bfcd0d300e1514d8f28cdf6e62bb68, type: 3}
+  - {fileID: 21300000, guid: e3c52c6a399e4de47960047bdb5ff951, type: 3}
+  - {fileID: 21300000, guid: f2aee932bf7da914388e0adac672864c, type: 3}
+  - {fileID: 21300000, guid: 6443fffc8c83f7942bc2f1071fdbbf1e, type: 3}
+  sprtCorps:
+  - {fileID: 21300000, guid: 7876b4de6dd11604d8a707d9de8f77d7, type: 3}
+  - {fileID: 21300000, guid: 9d25d1634de9f9c4497cc9560933e199, type: 3}
+  - {fileID: 21300000, guid: 32434a75c4147c648a780b532a89fbf3, type: 3}
+  - {fileID: 21300000, guid: 663d4bfdcaadb13479d28d7f72f1c8f3, type: 3}
+  sprtSlowCorps:
+  - {fileID: 21300000, guid: b3b6ded34f970eb419951e865315142c, type: 3}
+  - {fileID: 21300000, guid: 954f58ce13fc03346932adf3887129e3, type: 3}
+  - {fileID: 21300000, guid: 595b50ac605887642b15ef863f847c8e, type: 3}
+  - {fileID: 21300000, guid: cb4ec1cda71ec944c96866da57d878d5, type: 3}
+  sprtSlowBras:
+  - {fileID: 21300000, guid: 804bbbff224f73c418781da53cc27720, type: 3}
+  - {fileID: 21300000, guid: 977014a743bef4b43b2a612f5d040327, type: 3}
+  - {fileID: 21300000, guid: c48a71219b4fb1f4d9c3455c806e866d, type: 3}
+  - {fileID: 21300000, guid: 1fb95ed2aea3603439027eaa9f7d5b51, type: 3}
+  gm: {fileID: 0}
