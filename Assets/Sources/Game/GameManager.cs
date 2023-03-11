@@ -5,6 +5,7 @@ using System.Text;
 using TMPro;
 using Unity.MultiPlayerGame.Shared;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,8 +32,8 @@ public class GameManager : MonoBehaviour
     private GameState gameState;
 
     public List<Player> players = new List<Player>();
-    public GameObject canvas;
-
+    public GameObject canvas; 
+    public GameObject Spawner;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,16 +42,21 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void StartGame()
+    public void StartGame()
     {
         canvas.transform.Find("EndGame").gameObject.SetActive(false);
         canvas.transform.Find("StartGame").gameObject.SetActive(true);
-        players.ForEach(p => p.vie = 100);
-
+        players.ForEach(p => p.Reinit());
+        for(int i= 0; i< players.Count; i++)
+        {
+            players[i].transform.position=Spawner.transform.GetChild(i).transform.position;
+            players[i].transform.rotation = Spawner.transform.GetChild(i).transform.rotation;
+        }
+        gameState = GameState.START;
         //canvas.GetComponent<TextSlowWrite>().WriteText(canvas.transform.Find("StartGame").Find("StartText").GetComponent<TextMeshProUGUI>(), "Essaie d'éviter les rayonnements ! Attentions aux mutations ! Bonne chance !");
         StartCoroutine(WaitForStart());
-
     }
+
     IEnumerator WaitForStart()
     {
         yield return new WaitForSeconds(1);
@@ -74,7 +80,6 @@ public class GameManager : MonoBehaviour
             winner.score++;
 
         canvas.transform.Find("EndGame").gameObject.SetActive(true);
-
         canvas.GetComponent<TextSlowWrite>().WriteText(canvas.transform.Find("EndGame").Find("Winner").GetComponent<TextMeshProUGUI>(), "Astronaute "+winner.color+" a gagné la partie !");
 
         StringBuilder scoreStr = new StringBuilder();

@@ -112,7 +112,7 @@ public class ondes : MonoBehaviour
             otherObject = other;
             if (other.tag == "Player")
             {
-                other.GetComponent<Player>();
+                other.GetComponent<Player>().TakeDamage(50);
             }
         }
     }

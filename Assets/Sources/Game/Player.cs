@@ -40,6 +40,15 @@ public class Player : MonoBehaviour
         //rb.AddForce((new Vector2(transform.position.x, transform.position.y) - other).normalized * knockbackForce, ForceMode2D.Impulse);
     }
 
+    internal void Reinit()
+    {
+        vie = 100;
+        if(characterControler!=null)
+        characterControler.isdead = false;
+        if (lifebar != null)
+            lifebar.SetHealth(vie);
+    }
+
     public void TakeDamage(int damage)
     {
         vie -= damage;
