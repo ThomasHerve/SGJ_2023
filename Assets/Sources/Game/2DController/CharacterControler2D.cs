@@ -117,7 +117,7 @@ public class CharacterControler2D : MonoBehaviour
                 GameObject g = GameObject.Instantiate(balle, new Vector3(Canon.transform.position.x, Canon.transform.position.y,1), Quaternion.Euler(0, 0, 0));
                 g.transform.SetParent(gameObject.transform);
                 ondes o = g.GetComponent<ondes>();
-                GetComponent<AudioSource>().PlayOneShot(shootClip);
+                transform.Find("Pivot Bras").GetComponent<AudioSource>().PlayOneShot(shootClip);
 
                 if (!isKeyboard)
                 {
