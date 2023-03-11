@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1085668564}
   - component: {fileID: -7160390825545148056}
   m_Layer: 6
-  m_Name: Asteroid
+  m_Name: Asteroid 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4fcdcc1804bbc8148af0c4f0be174b67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 53d49dbfcf18302419d9efd158dc34eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

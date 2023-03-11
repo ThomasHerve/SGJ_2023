@@ -163,6 +163,14 @@ public class Player : MonoBehaviour
             AddMutation(indexs[Random.Range(0, indexs.Count)]);
         }
     }
+    
+    public void TakeDamage(int damage,GameObject shooter)
+    {
+        vie -= damage;
+        if (vie < 0) { vie = 0; }
+        if (vie == 0) Die();
+        lifebar.SetHealth(vie);
+    }
 
     private void Die()
     {
