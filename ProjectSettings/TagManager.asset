@@ -8,7 +8,6 @@ TagManager:
   - PlayerPlaceHolder1
   - PlayerPlaceHolder2
   - PlayerPlaceHolder3
-  - LobbyReturnBtn
   - EventSystem
   layers:
   - Default
