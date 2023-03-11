@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private GameState gameState;
 
-    List<Player> players = Enumerable.Range(0, PlayerInstance.currentPlayerNumber).Select(i => new Player()).ToList();
+    public List<Player> players = new List<Player>();
     public GameObject canvas;
 
     // Start is called before the first frame update
@@ -59,9 +59,11 @@ public class GameManager : MonoBehaviour
 
     void CheckEndGame()
     {
-        if(players.Where(p => p.vie != 0).Count() <= 1)
+        if (players.Where(p => p.vie != 0).Count() <= 1 && gameState != GameState.END)
+        {
             EndGame();
-        
+            gameState = GameState.END;
+        }
     }
 
 
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckEndGame();
         switch (gameState)
         {
             case GameState.START:

@@ -111,7 +111,7 @@ public class ondes : MonoBehaviour
             interrupted = true;
             if (other.tag == "Player")
             {
-                other.GetComponent<Player>().TakeDamage(10);
+                other.GetComponent<Player>();
             }
         }
     }
