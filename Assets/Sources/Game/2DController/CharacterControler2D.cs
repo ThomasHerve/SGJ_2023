@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -134,6 +135,40 @@ public class CharacterControler2D : MonoBehaviour
                 o.shooter = this.gameObject;
             }
         }
+    }
+
+    internal void DieAnimation()
+    {
+        StartCoroutine(DriftCoroutine());
+    }
+    public GameObject targetObject;
+    public Vector3 driftDirection;
+
+    private IEnumerator DriftCoroutine()
+    {
+        Quaternion startingRotation = transform.rotation;
+        float timeElapsed = 0f;
+
+        while (timeElapsed < 4f)
+        {
+            timeElapsed += Time.deltaTime;
+
+            // Calculer la direction de dérive en fonction de la direction et de la vitesse
+            Vector3 drift = driftDirection.normalized * 2f * Time.deltaTime;
+
+            // Tourner dans le sens inverse de l'objet cible
+            Quaternion targetRotation = Quaternion.LookRotation(targetObject.transform.position - transform.position);
+            Quaternion inverseRotation = Quaternion.Inverse(targetRotation);
+            transform.rotation = Quaternion.Slerp(startingRotation, inverseRotation, timeElapsed / 4f);
+
+            // Déplacer le GameObject
+            transform.position += drift;
+
+            yield return null;
+        }
+
+        // Revenir à la rotation initiale à la fin de la coroutine
+        transform.rotation = startingRotation;
     }
 
     public void Movement(InputAction.CallbackContext context)

@@ -117,7 +117,7 @@ public class ondes : MonoBehaviour
             distance = Vector2.Distance(new Vector2(linePointTotal[0].x, linePointTotal[0].y), other.gameObject.transform.position);
             if (other.tag == "Player" && !interrupted)
             {
-                other.GetComponent<Player>().TakeDamage(50);
+                other.GetComponent<Player>().TakeDamage(50,shooter);
             }
             interrupted = true;
         }

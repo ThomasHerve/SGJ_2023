@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer slowCorps;
     [SerializeField]
     private SpriteRenderer slowBras;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +61,14 @@ public class Player : MonoBehaviour
     {
         vie -= damage;
         if (vie < 0) { vie = 0;}
+        if (vie == 0) Die();
+        lifebar.SetHealth(vie);
+    }
+
+    public void TakeDamage(int damage,GameObject shooter)
+    {
+        vie -= damage;
+        if (vie < 0) { vie = 0; }
         if (vie == 0) Die();
         lifebar.SetHealth(vie);
     }
