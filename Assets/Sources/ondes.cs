@@ -23,6 +23,7 @@ public class ondes : MonoBehaviour
     private float currentTime = 0;
     private Collider2D otherObject;
     public GameObject shooter;
+    private bool first = true;
 
 
     private bool interrupted = false;
@@ -54,7 +55,7 @@ public class ondes : MonoBehaviour
         int index = Mathf.FloorToInt(currentTime / flightDuration * resolution);
         if (index >= resolution)
             GameObject.Destroy(this.gameObject);
-        /*if (interrupted)
+        if (interrupted)
         {
             for (int i = 0; i < resolution; i++)
             { 
@@ -63,10 +64,10 @@ public class ondes : MonoBehaviour
                     RenderLine(i);
                 }
             }
-        *///} else
-        //{
+        } else
+        {
             RenderLine(resolution);
-        //}
+        }
     }
 
     private void RenderLine(int position)
@@ -81,13 +82,16 @@ public class ondes : MonoBehaviour
             {
                 linePoints[i] = new Vector3(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y, 0);
                 linePoints2[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
+                if (first) linePointTotal[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
             }
             else
             {
                 linePoints[i] = new Vector3(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i], 0);
                 linePoints2[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
+                if (first) linePointTotal[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
             }
         }
+        first = false;
         lineRenderer.positionCount = position;
         lineRenderer.SetPositions(linePoints);
         collider2D.SetPoints(new List<Vector2>(linePoints2));
