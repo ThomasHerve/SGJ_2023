@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ondes : MonoBehaviour
 {
-    public static int resolution = 500;
+    public static int resolution = 200;
     public float flightDuration = 0.8f;
     public float deadTime = 10;
     private Vector3[] linePoints = new Vector3[resolution];
     private Vector2[] linePoints2 = new Vector2[resolution];
+    private Vector2[] linePointTotal = new Vector2[resolution];
     private float[] deltafloat = new float[resolution];
     private float xStartPosition,yStartPosition;
     public Vector2 direction;
@@ -19,6 +21,7 @@ public class ondes : MonoBehaviour
     private LineRenderer lineRenderer;
     private EdgeCollider2D collider2D;
     private float currentTime = 0;
+    private Collider2D otherObject;
     public GameObject shooter;
 
 
@@ -51,33 +54,19 @@ public class ondes : MonoBehaviour
         int index = Mathf.FloorToInt(currentTime / flightDuration * resolution);
         if (index >= resolution)
             GameObject.Destroy(this.gameObject);
-        //if (interrupted)
-        //    return;
-        RenderLine(resolution);
-        /*
-        for (i = 0; i/1000f < previoustime - startTime; i++)
+        /*if (interrupted)
         {
-            float height = GetProjectileHeight(i);
-            if (direction.y >= 0.5) {
-                linePoints[i] = new Vector3(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y  , 0);
-                linePoints2[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
+            for (int i = 0; i < resolution; i++)
+            { 
+                if(!IsInside(linePointTotal[i]))
+                {
+                    RenderLine(i);
+                }
             }
-            else
-            {
-                linePoints[i] = new Vector3(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i], 0);
-                linePoints2[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
-            }
-        }
-        for (int j = i; j < resolution ; j++)
-        {
-            float height = GetProjectileHeight(i);
-            linePoints[j] = new Vector3(transform.position.x + (direction * height).x , transform.position.y + (direction * height).y, 0);
-            linePoints2[j] = new Vector2((direction * height).x, (direction * height).y);
-        }
-        lineRenderer.positionCount = resolution;
-        lineRenderer.SetPositions(linePoints);
-        collider2D.SetPoints(new List<Vector2>(linePoints2));
-        */
+        *///} else
+        //{
+            RenderLine(resolution);
+        //}
     }
 
     private void RenderLine(int position)
@@ -104,11 +93,19 @@ public class ondes : MonoBehaviour
         collider2D.SetPoints(new List<Vector2>(linePoints2));
     }
 
+    private bool IsInside(Vector3 point)
+    {
+        Vector3 closest = otherObject.ClosestPoint(point);
+        // Because closest=point if point is inside - not clear from docs I feel
+        return closest == point;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject != shooter)
         {
             interrupted = true;
+            otherObject = other;
             if (other.tag == "Player")
             {
                 other.GetComponent<Player>();

@@ -19,6 +19,8 @@ public class CharacterControler2D : MonoBehaviour
     private GameObject PivotBras, Canon, balle;
     [SerializeField]
     private float speed;
+    [SerializeReference]
+    private float shootCD = 2;
     [SerializeField]
     private float high;
 
@@ -87,6 +89,7 @@ public class CharacterControler2D : MonoBehaviour
                     spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                     spriteRendererBras.gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0, 0, 0);
                     PivotBras.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    isRight = true;
                 }
                 else if (movementInput.x < 0)
                 {
@@ -94,6 +97,7 @@ public class CharacterControler2D : MonoBehaviour
                     spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, -180);
                     spriteRendererBras.gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0, 180, 0);
                     PivotBras.transform.rotation = Quaternion.Euler(0, 0, 180);
+                    isRight = false;
                 }
             }
             else
@@ -102,15 +106,15 @@ public class CharacterControler2D : MonoBehaviour
                 PivotBras.transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(targetInput, Vector2.right));
             }
            
-            Debug.Log(shootInput);
             //fonction de shoot
-            if (shootInput && Time.time - cd > 2)
+            if (shootInput && Time.time - cd > shootCD)
             {
                 cd = Time.time;
                 //Tirer
                 GameObject g = GameObject.Instantiate(balle, Canon.transform.position, Quaternion.Euler(0, 0, 0));
                 g.transform.SetParent(gameObject.transform);
                 ondes o = g.GetComponent<ondes>();
+  
                 if (!isKeyboard)
                 {
                     o.direction = targetInput;
