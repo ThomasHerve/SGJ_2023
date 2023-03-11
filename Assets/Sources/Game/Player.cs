@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [Tooltip("Valeurs mutation")]
     public int healMutationValue;
     public int spikesDamage;
+    public float armorReduction;
+    public float corrosionMultiplier;
 
 
     // Mutation values
@@ -180,6 +182,8 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (armor) damage = Mathf.FloorToInt(armorReduction * damage);
+        if (corrosion) damage = Mathf.FloorToInt(corrosionMultiplier * damage);
         vie -= damage;
         if (vie < 0) { vie = 0;}
         if (vie == 0) Die();
@@ -191,6 +195,7 @@ public class Player : MonoBehaviour
             StartCoroutine(WaitDelayForVoice(6f));
         }
     }
+
     IEnumerator WaitDelayForVoice(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -208,17 +213,9 @@ public class Player : MonoBehaviour
                     indexs.Add(i);
                     
             }
-            AddMutation(indexs[Random.Range(0, indexs.Count)]);
-            //AddMutation(5);
+            //AddMutation(indexs[Random.Range(0, indexs.Count)]);
+            AddMutation(3);
         }
-    }
-    
-    public void TakeDamage(int damage,GameObject shooter)
-    {
-        vie -= damage;
-        if (vie < 0) { vie = 0; }
-        if (vie == 0) Die();
-        lifebar.SetHealth(vie);
     }
 
     public void Heal(int value)

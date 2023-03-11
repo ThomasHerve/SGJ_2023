@@ -1306,6 +1306,9 @@ MonoBehaviour:
   mutationMin: 30
   mutationMax: 49
   healMutationValue: 30
+  spikesDamage: 5
+  armorReduction: 0.7
+  corrosionMultiplier: 1.2
   knockbackForce: 2
   knockbackDuration: 0.3
   menuPlayer: {fileID: 0}
@@ -1336,6 +1339,7 @@ MonoBehaviour:
   sleep: 0
   armor: 0
   corrosion: 0
+  spikes: 0
   voiceClips:
   - {fileID: 8300000, guid: 4d02cb6bac6f9044181375af717ab0a4, type: 3}
   - {fileID: 8300000, guid: a8b12a26706f5434db9704213f3c806e, type: 3}

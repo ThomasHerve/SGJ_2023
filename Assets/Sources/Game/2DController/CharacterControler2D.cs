@@ -230,12 +230,12 @@ public class CharacterControler2D : MonoBehaviour
         influence = Vector2.zero;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if(player.spikes && collision.tag == "Player")
+        if(player.spikes && other.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(player.spikesDamage);
-            //collision.gameObject.GetComponent<Player>().Knockback()
+            other.gameObject.GetComponent<Player>().TakeDamage(player.spikesDamage);
+            other.gameObject.GetComponent<Player>().Knockback(new Vector2(transform.position.x, transform.position.y));
         }
     }
 }
