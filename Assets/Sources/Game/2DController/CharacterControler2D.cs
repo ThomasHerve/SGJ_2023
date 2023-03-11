@@ -113,7 +113,8 @@ public class CharacterControler2D : MonoBehaviour
                 GameObject g = GameObject.Instantiate(balle, new Vector3(Canon.transform.position.x, Canon.transform.position.y,1), Quaternion.Euler(0, 0, 0));
                 g.transform.SetParent(gameObject.transform);
                 ondes o = g.GetComponent<ondes>();
-  
+                GetComponent<AudioSource>().PlayOneShot(shootClip);
+
                 if (!isKeyboard)
                 {
                     o.direction = targetInput;
@@ -150,7 +151,6 @@ public class CharacterControler2D : MonoBehaviour
     public void shoot(InputAction.CallbackContext context)
     {
         shootInput = context.ReadValueAsButton();
-        GetComponent<AudioSource>().PlayOneShot(shootClip);
     }
 
     public void AddForce(Vector2 direction, float duration)
