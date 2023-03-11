@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -106,6 +107,11 @@ public class Player : MonoBehaviour
     public bool armor = false;
     public bool corrosion = false;
 
+    [SerializeField]
+    AudioClip[] voiceClips;
+
+    bool isVoicePlaying = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -156,6 +162,17 @@ public class Player : MonoBehaviour
         if (vie < 0) { vie = 0;}
         if (vie == 0) Die();
         lifebar.SetHealth(vie);
+        if (!isVoicePlaying)
+        {
+            isVoicePlaying = true;
+            GetComponent<AudioSource>().PlayOneShot(voiceClips[UnityEngine.Random.Range(0, voiceClips.Length)]);
+            StartCoroutine(WaitDelayForVoice(6f));
+        }
+    }
+    IEnumerator WaitDelayForVoice(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isVoicePlaying = false;
     }
 
     public void TakeMutation(int value)
