@@ -45,6 +45,7 @@ public class Obstacle : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<Player>().Knockback(new Vector2(transform.position.x, transform.position.y));
+            GetComponent<AudioSource>().Play();
         }
     }
 
