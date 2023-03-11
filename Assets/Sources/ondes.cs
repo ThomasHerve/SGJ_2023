@@ -24,6 +24,8 @@ public class ondes : MonoBehaviour
     private float currentTime = 0;
     private Collider2D otherObject;
     public GameObject shooter;
+    public int damage = 50;
+    public int mutationValue = 50;
 
     private bool first = true;
     private float distance;
@@ -117,7 +119,8 @@ public class ondes : MonoBehaviour
             distance = Vector2.Distance(new Vector2(linePointTotal[0].x, linePointTotal[0].y), other.gameObject.transform.position);
             if (other.tag == "Player" && !interrupted)
             {
-                other.GetComponent<Player>().TakeDamage(50);
+                other.GetComponent<Player>().TakeDamage(damage);
+                other.GetComponent<Player>().TakeMutation(mutationValue);
             }
             interrupted = true;
         }

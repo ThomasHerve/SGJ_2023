@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -11,6 +7,12 @@ public class Player : MonoBehaviour
     public int vie = 100;
     public int score = 0;
     public string color = "red";
+    public int mutationMin = 30;
+    public int mutationMax = 49;
+
+    // Mutation values
+    private int mutationCurrentValue = 0;
+    private int mutationValue;
 
     [SerializeField]
     private float knockbackForce;
@@ -35,11 +37,18 @@ public class Player : MonoBehaviour
 
 
 
+    public void SetNextMutationValues()
+    {
+        mutationCurrentValue = 0;
+        mutationValue = Random.Range(mutationMin, mutationMax);
+    }
+
     public void RevertAllmutations()
     {
         foreach (Mutation mutation in mutations)
         {
-            mutation.effect.transform.rotation = Quaternion.Euler(0, transform.rotation.z, 0);
+            if(mutation.index == 0 || mutation.index == 1)
+                mutation.effect.transform.rotation = Quaternion.Euler(0, transform.rotation.z, 0);
         }
     }
 
@@ -105,9 +114,10 @@ public class Player : MonoBehaviour
         // Mutation
         currentMutations[0] = new Mutation { index = -1 };
         currentMutations[1] = new Mutation { index = -1 };
+        SetNextMutationValues();
 
         // DEBUG
-        AddMutation(1);
+        //AddMutation(1);
     }
 
     // Update is called once per frame
@@ -137,6 +147,21 @@ public class Player : MonoBehaviour
         if (vie < 0) { vie = 0;}
         if (vie == 0) Die();
         lifebar.SetHealth(vie);
+    }
+
+    public void TakeMutation(int value)
+    {
+        mutationCurrentValue += value;
+        if (mutationCurrentValue >= mutationValue) {
+            List<int> indexs = new List<int>();
+            for(int i = 0; i < mutations.Length; i++)
+            {
+                if (currentMutations[0].index != mutations[i].index && currentMutations[1].index != mutations[i].index)
+                    indexs.Add(i);
+                    
+            }
+            AddMutation(indexs[Random.Range(0, indexs.Count)]);
+        }
     }
 
     private void Die()

@@ -173,3 +173,5 @@ MonoBehaviour:
   directionCur: {x: 0, y: 0}
   horizontalVelocity: 0
   shooter: {fileID: 0}
+  damage: 50
+  mutationValue: 50
