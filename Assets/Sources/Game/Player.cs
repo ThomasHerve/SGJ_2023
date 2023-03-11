@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     public int vie = 100;
     public int score = 0;
-    public string color = "white";
+    public string color = "red";
 
     [SerializeField]
     private float knockbackForce;
@@ -20,6 +20,14 @@ public class Player : MonoBehaviour
     private CharacterControler2D characterControler;
     public GameObject menuPlayer;
     private LifeBar lifebar;
+    [SerializeField]
+    private SpriteRenderer corps;
+    [SerializeField]
+    private SpriteRenderer bras;
+    [SerializeField]
+    private SpriteRenderer slowCorps;
+    [SerializeField]
+    private SpriteRenderer slowBras;
 
     [Tooltip("Mutations")]
     public Mutation[] mutations;
@@ -124,5 +132,13 @@ public class Player : MonoBehaviour
     private void Die()
     {
         characterControler.isdead = true;
+    }
+
+    internal void changeSkin(Sprite sprite1, Sprite sprite2, Sprite sprite3, Sprite sprite, string v)
+    {
+        bras.sprite = sprite2;
+        corps.sprite = sprite1;
+        //slowBras.sprite = sprite;
+        color = v;
     }
 }

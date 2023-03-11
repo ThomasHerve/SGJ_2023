@@ -32,13 +32,13 @@ namespace Unity.MultiPlayerGame.Shared
         {
             if (currentPlayerNumber == MAX_PLAYER)
                 return -1;
+            int t = players.IndexOf(null);
             players[players.IndexOf(null)] = player;
-
 
             currentPlayerNumber++;
 
 
-            return currentPlayerNumber - 1;
+            return t;
         }
 
 
@@ -59,7 +59,16 @@ namespace Unity.MultiPlayerGame.Shared
 
         public static bool AreAllPlayersReady()
         {
-            return players.Any(player => player != null) && players.Where(p => p != null).All(p => p.isReady);
+            if (currentPlayerNumber == 1)
+                return false;
+            bool flag = true;
+            foreach (PlayerInstance p in players) {
+                if(  players.Any(pl => pl != null && p != null && pl.skin == p.skin && pl != p))
+                {
+                    flag = false;
+                }
+            }
+            return flag && players.Any(player => player != null) && players.Where(p => p != null).All(p => p.isReady);
         }
 
         #endregion
@@ -79,7 +88,7 @@ namespace Unity.MultiPlayerGame.Shared
         public InputDevice InputDevice { get => inputDevice; set => inputDevice = value; }
 
         int number = -1;
-        int skin = 0;
+        public int skin = 0;
         bool isReady = false;
 
         public void Start()
@@ -132,7 +141,15 @@ namespace Unity.MultiPlayerGame.Shared
         {
             if (!context.performed)
                 return;
-            isReady = true;
+            bool flag = true;
+            foreach (PlayerInstance p in players)
+            {
+                if (players.Any(pl => pl != null && p != null && pl.skin == p.skin && pl != p))
+                {
+                    flag = false;
+                }
+            }
+            isReady = flag;
 
         }
 
