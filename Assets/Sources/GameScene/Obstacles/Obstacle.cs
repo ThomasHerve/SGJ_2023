@@ -22,6 +22,22 @@ public class Obstacle : MonoBehaviour
     protected void Update()
     {
         rb.position += direction.normalized * speed * Time.deltaTime;
+        if(transform.position.x < -20)
+        {
+            Destroy(gameObject);
+        }
+        if (transform.position.x > 20)
+        {
+            Destroy(gameObject);
+        }
+        if (transform.position.y < -20)
+        {
+            Destroy(gameObject);
+        }
+        if (transform.position.y > 20)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
