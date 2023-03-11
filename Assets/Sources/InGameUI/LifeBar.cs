@@ -25,8 +25,7 @@ public class LifeBar : MonoBehaviour
 
     void Start()
     {
-        //SetMaxHealth(100);
-        SetHealth(55);
+        SetMaxHealth(100);
     }
 
 }
