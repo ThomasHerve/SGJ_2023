@@ -107,8 +107,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.018692017
-        value: 0.8669338
+        time: 0.026168358
+        value: 0.04840727
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -169,4 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flightDuration: 7000
   deadTime: 3
+  direction: {x: 0, y: 0}
+  directionCur: {x: 0, y: 0}
   horizontalVelocity: 0
+  shooter: {fileID: 0}
