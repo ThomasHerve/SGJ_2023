@@ -9,7 +9,7 @@ public class MutationIcon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadSprite("MutationIcons/Cercle2");
+        //LoadSprite("MutationIcons/Cercle2");
     }
 
     // Update is called once per frame
