@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class CharacterControler2D : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
-
+    private Player player;
 
     private Vector2 movementInput, targetInput, influence;
     public bool isdead;
@@ -38,6 +38,7 @@ public class CharacterControler2D : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRendererBras = PivotBras.GetComponentInChildren<SpriteRenderer>();
         isdead = false;
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -48,12 +49,12 @@ public class CharacterControler2D : MonoBehaviour
             Vector2 vel;
             if (influence != Vector2.zero)
             {
-                vel = influence * Time.deltaTime * speed;
+                vel = influence * Time.deltaTime * GetSpeed();
                 transform.Find("JetPack").GetComponent<SoundFade>().FadeOut();
             }
             else
             {
-                vel = movementInput * Time.deltaTime * speed;
+                vel = movementInput * Time.deltaTime * GetSpeed();
                 if (movementInput == Vector2.zero)
                     transform.Find("JetPack").GetComponent<SoundFade>().FadeOut();
             }
@@ -139,6 +140,20 @@ public class CharacterControler2D : MonoBehaviour
         }
     }
 
+    public float GetSpeed()
+    {
+        float returnSpeed = speed;
+        if(player.spikes)
+        {
+            returnSpeed *= 0.9f;
+        }
+        if (player.sleep)
+        {
+            returnSpeed *= 0.5f;
+        }
+        return returnSpeed;
+    }
+
     public void StopC()
     {
         StopCoroutine(DriftCoroutine());
@@ -213,5 +228,14 @@ public class CharacterControler2D : MonoBehaviour
         influence = direction;
         yield return new WaitForSeconds(duration);
         influence = Vector2.zero;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(player.spikes && collision.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Player>().TakeDamage(player.spikesDamage);
+            //collision.gameObject.GetComponent<Player>().Knockback()
+        }
     }
 }

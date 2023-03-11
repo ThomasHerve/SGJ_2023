@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
     public string color = "red";
     public int mutationMin = 30;
     public int mutationMax = 49;
+    [Tooltip("Valeurs mutation")]
+    public int healMutationValue;
+    public int spikesDamage;
+
 
     // Mutation values
     private int mutationCurrentValue = 0;
@@ -74,6 +78,14 @@ public class Player : MonoBehaviour
                 mutations[num].effectBody.gameObject.SetActive(value);
                 mutations[num].effectArms.gameObject.SetActive(value);
                 break;
+            case 4:
+                mutations[num].effectBody.gameObject.SetActive(value);
+                if(value)StartCoroutine(HealMutation(num));
+                break;
+            case 5:
+                spikes = value;
+                mutations[num].effectBody.gameObject.SetActive(value);
+                break;
         }
 
     }
@@ -105,6 +117,16 @@ public class Player : MonoBehaviour
     public bool sleep = false;
     public bool armor = false;
     public bool corrosion = false;
+    public bool spikes = false;
+
+    // Mutation functions
+    System.Collections.IEnumerator HealMutation(int num)
+    {
+        Heal(healMutationValue);
+        yield return new WaitForSeconds(2);
+        RemoveMutation(0);
+        RemoveMutation(1);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -120,7 +142,7 @@ public class Player : MonoBehaviour
         SetNextMutationValues();
 
         // DEBUG
-        //AddMutation(3);
+        //AddMutation(5);
     }
 
     // Update is called once per frame
@@ -170,6 +192,7 @@ public class Player : MonoBehaviour
                     
             }
             AddMutation(indexs[Random.Range(0, indexs.Count)]);
+            //AddMutation(5);
         }
     }
     
@@ -178,6 +201,14 @@ public class Player : MonoBehaviour
         vie -= damage;
         if (vie < 0) { vie = 0; }
         if (vie == 0) Die();
+        lifebar.SetHealth(vie);
+    }
+
+    public void Heal(int value)
+    {
+        if(vie <= 0) return;
+        if (vie + value >= 100) vie = 100;
+        else vie += value;
         lifebar.SetHealth(vie);
     }
 
