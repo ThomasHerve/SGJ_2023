@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -23,8 +24,9 @@ public class ondes : MonoBehaviour
     private float currentTime = 0;
     private Collider2D otherObject;
     public GameObject shooter;
-    private bool first = true;
 
+    private bool first = true;
+    private float distance;
 
     private bool interrupted = false;
     // Start is called before the first frame update
@@ -57,23 +59,19 @@ public class ondes : MonoBehaviour
             GameObject.Destroy(this.gameObject);
         if (interrupted)
         {
-            for (int i = 0; i < resolution; i++)
-            { 
-                if(!IsInside(linePointTotal[i]))
-                {
-                    RenderLine(i);
-                }
-            }
+            
+            RenderLineCut();
+
         } else
         {
-            RenderLine(resolution);
+            RenderLine(resolution, true);
         }
     }
 
-    private void RenderLine(int position)
+    private void RenderLine(int position, bool hitbox)
     {
         linePoints = new Vector3[position];
-        linePoints2 = new Vector2[position];
+        if(hitbox)linePoints2 = new Vector2[position];
 
         for (int i = 0; i < position; i++)
         {
@@ -81,39 +79,47 @@ public class ondes : MonoBehaviour
             if (direction.y >= 0.5)
             {
                 linePoints[i] = new Vector3(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y, 0);
-                linePoints2[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
-                if (first) linePointTotal[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
+                if (hitbox) linePoints2[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
+                if (first) linePointTotal[i] = new Vector2(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y);
             }
             else
             {
                 linePoints[i] = new Vector3(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i], 0);
-                linePoints2[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
-                if (first) linePointTotal[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
+                if (hitbox) linePoints2[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
+                if (first) linePointTotal[i] = new Vector2(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i]);
             }
         }
         first = false;
         lineRenderer.positionCount = position;
         lineRenderer.SetPositions(linePoints);
-        collider2D.SetPoints(new List<Vector2>(linePoints2));
+        if (hitbox)collider2D.SetPoints(new List<Vector2>(linePoints2));
     }
 
-    private bool IsInside(Vector3 point)
+    private void RenderLineCut()
     {
-        Vector3 closest = otherObject.ClosestPoint(point);
-        // Because closest=point if point is inside - not clear from docs I feel
-        return closest == point;
+        int i = 0;
+        for (i = 0; i < resolution; i++)
+        {
+            if (Vector2.Distance(new Vector2(linePointTotal[0].x, linePointTotal[0].y), linePointTotal[i]) > distance)
+            {
+                break;
+            }
+        }
+        RenderLine(i, false);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other);
         if(other.gameObject != shooter)
         {
-            interrupted = true;
             otherObject = other;
-            if (other.tag == "Player")
+            distance = Vector2.Distance(new Vector2(linePointTotal[0].x, linePointTotal[0].y), other.gameObject.transform.position);
+            if (other.tag == "Player" && !interrupted)
             {
                 other.GetComponent<Player>().TakeDamage(50);
             }
+            interrupted = true;
         }
     }
 

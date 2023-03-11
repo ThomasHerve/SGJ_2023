@@ -364,10 +364,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3c895c405bbbc49b77c38f73296953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isdead: 0
   PivotBras: {fileID: 1584563509}
   Canon: {fileID: 977519969}
   balle: {fileID: 1129396168883762450, guid: 423cdfa2d21076042a671ee272c5d35f, type: 3}
   speed: 300
+  shootCD: 2
   high: 0
   shootClip: {fileID: 8300000, guid: ac68bd9ef5b631545b984e0a78be4e32, type: 3}
   isKeyboard: 0
