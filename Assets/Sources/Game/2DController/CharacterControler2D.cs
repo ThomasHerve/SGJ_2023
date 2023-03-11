@@ -67,16 +67,13 @@ public class CharacterControler2D : MonoBehaviour
             {
                 if (targetInput.x > 0)
                 {
-                    if (targetInput.x > 0)
-                    {
-                        transform.rotation = Quaternion.Euler(0, 0, 0);
-                        spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0); ;
-                    }
-                    else if (targetInput.x < 0)
-                    {
-                        transform.rotation = Quaternion.Euler(0, 180, 0);
-                        spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(180, 0, 0); ;
-                    }
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0); ;
+                }
+                else if (targetInput.x < 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    spriteRendererBras.gameObject.transform.localRotation = Quaternion.Euler(180, 0, 0); ;
                 }
             }
 
