@@ -101,10 +101,8 @@ namespace Unity.MultiPlayerGame.Shared
             this.transform.localPosition = new Vector3(0, 0, 0);
             this.transform.localScale = new Vector3(1, 1, 1);
 
-            if (inputDevice != null)
-                this.transform.Find("SelectionPanel").GetComponentInChildren<TextMeshProUGUI>().text = inputDevice.name;
-            else
-                this.transform.Find("SelectionPanel").GetComponentInChildren<TextMeshProUGUI>().text = "Keyboard 2";
+            this.transform.Find("SelectionPanel").GetComponentInChildren<TextMeshProUGUI>().text = inputDevice.name;
+
 
             Debug.Log("Player added at position " + number);
 
@@ -164,7 +162,9 @@ namespace Unity.MultiPlayerGame.Shared
                 return;
 
             has2PlayerKeyboard = true;
-            GameObject newPlayer = Instantiate(this.gameObject);
+            PlayerInputManager playerInputManager = FindObjectOfType<PlayerInputManager>();
+            GameObject newPlayer =  playerInputManager.JoinPlayer(currentPlayerNumber, -1, "Keyboard", new InputDevice[] { Keyboard.current, Mouse.current }).gameObject;
+
             newPlayer.GetComponent<PlayerInput>().SwitchCurrentActionMap("PlayerUI2");
         }
 
