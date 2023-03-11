@@ -78,7 +78,10 @@ public class ondes : MonoBehaviour
     {
         if(other.gameObject != shooter)
         {
-            Debug.Log("hey !");
+            if (other.tag == "Player")
+            {
+                other.GetComponent<Player>().TakeDamage(10);
+            }
 
         }
     }

@@ -11,6 +11,7 @@ public class GamerManager : MonoBehaviour
     private InputActionAsset keyboard1;
     [SerializeField]
     private InputActionAsset keyboard2;
+    public GameObject[] Menu;
 
     [SerializeField]
     private GameObject player;
@@ -39,6 +40,7 @@ public class GamerManager : MonoBehaviour
                 GameObject player = playerInputManager.JoinPlayer(i, -1, "keyboard", p.InputDevice).gameObject;
                 player.GetComponent<PlayerInput>().SwitchCurrentActionMap("PlayerInput");
                 player.GetComponent<CharacterControler2D>().isKeyboard = true;
+                player.GetComponent<Player>().menuPlayer = Menu[i];
                 keyboardTaken = true;
             }
             else if (p.InputDevice is Keyboard)
@@ -46,12 +48,14 @@ public class GamerManager : MonoBehaviour
                 GameObject player = playerInputManager.JoinPlayer(i, -1, "keyboard", Keyboard.current).gameObject;
                 player.GetComponent<PlayerInput>().SwitchCurrentActionMap("PlayerInput2");
                 player.GetComponent<CharacterControler2D>().isKeyboard = true;
+                player.GetComponent<Player>().menuPlayer = Menu[i];
                 keyboardTaken = true;
             }
                 else
             {
                 GameObject player = playerInputManager.JoinPlayer(i, -1, "Gamepad", p.InputDevice).gameObject;
-            }
+                player.GetComponent<Player>().menuPlayer = Menu[i];
+                }
             i++;
         }
     }

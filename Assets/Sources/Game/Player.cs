@@ -15,11 +15,16 @@ public class Player : MonoBehaviour
     private float knockbackDuration;
 
     private CharacterControler2D characterControler;
+    public GameObject menuPlayer;
+    private LifeBar lifebar;
 
     // Start is called before the first frame update
     void Start()
     {
         characterControler = GetComponent<CharacterControler2D>();
+        menuPlayer.SetActive(true);
+        lifebar = menuPlayer.GetComponentInChildren<LifeBar>();
+        lifebar.SetMaxHealth(100);
     }
 
     // Update is called once per frame
@@ -38,5 +43,6 @@ public class Player : MonoBehaviour
     {
         vie -= damage;
         if (vie < 0) vie = 0;
+        lifebar.SetHealth(vie);
     }
 }
