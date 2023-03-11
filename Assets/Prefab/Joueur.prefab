@@ -611,6 +611,12 @@ MonoBehaviour:
   knockbackForce: 2
   knockbackDuration: 0.3
   menuPlayer: {fileID: 0}
+  mutations:
+  - sprite: {fileID: 21300000, guid: 56dea5bf82bd148499e89d728250d45e, type: 3}
+    index: 0
+  - sprite: {fileID: 21300000, guid: 8ec73f305f5ee4d48ad7bdc9c8256cbc, type: 3}
+    index: 1
+  test: 0
 --- !u!82 &-2458671708955766601
 AudioSource:
   m_ObjectHideFlags: 0
