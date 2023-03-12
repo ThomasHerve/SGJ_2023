@@ -1058,9 +1058,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isdead: 0
+  color: 
   PivotBras: {fileID: 1584563509}
   Canon: {fileID: 977519969}
-  balle: {fileID: 1129396168883762450, guid: 423cdfa2d21076042a671ee272c5d35f, type: 3}
+  tireBleu: {fileID: 1129396168883762450, guid: 0cc957f45c8c4004ab83010c8439728c, type: 3}
+  tireVert: {fileID: 1129396168883762450, guid: 3698f247b0f460747a5713f18f96b6f3, type: 3}
+  tireRouge: {fileID: 1129396168883762450, guid: 423cdfa2d21076042a671ee272c5d35f, type: 3}
+  tireOrange: {fileID: 1129396168883762450, guid: a0bfc294d0486324b83a92e1370f1ec9, type: 3}
   speed: 300
   shootCD: 1.1
   high: 0

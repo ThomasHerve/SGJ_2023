@@ -4,12 +4,13 @@ using UnityEngine;
 public class ondes : MonoBehaviour
 {
     public static int resolution = 200;
+    public static int  precalcul = 30;
     public float flightDuration = 0.8f;
     public float deadTime = 10;
     private Vector3[] linePoints = new Vector3[resolution];
     private Vector2[] linePoints2 = new Vector2[resolution];
     private Vector2[] linePointTotal = new Vector2[resolution];
-    private float[] deltafloat = new float[resolution];
+    private float[] deltafloat = new float[resolution+precalcul];
     private float xStartPosition,yStartPosition;
     public Vector2 direction;
     public Vector2 directionCur;
@@ -21,10 +22,9 @@ public class ondes : MonoBehaviour
     public GameObject shooter;
     public int damage = 50;
     public int mutationValue = 50;
-
+    public bool test;
     private bool first = true;
     private float distance;
-
     private bool interrupted = false;
     // Start is called before the first frame update
     void Start()
@@ -34,7 +34,7 @@ public class ondes : MonoBehaviour
         if (direction == Vector2.zero) direction = new Vector2(1f, 0f);
         lineRenderer = GetComponent<LineRenderer>();
         collider2D = GetComponent<EdgeCollider2D>();
-        for (int i = 0;i < resolution; i++)
+        for (int i = 0;i < resolution+precalcul; i++)
         {
             if( i== 0)
             {
@@ -68,7 +68,7 @@ public class ondes : MonoBehaviour
     private void RenderLine(int position, bool hitbox)
     {
         linePoints = new Vector3[position];
-        if(hitbox)linePoints2 = new Vector2[position];
+        if(hitbox)linePoints2 = new Vector2[position+2];
 
         for (int i = 0; i < position; i++)
         {
@@ -86,10 +86,58 @@ public class ondes : MonoBehaviour
                 if (first) linePointTotal[i] = new Vector2(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i]);
             }
         }
+        if(hitbox)
+        for(int i = 0; i < precalcul; i++)
+        {
+            float t = GetProjectileHeight(i);
+            if (hitbox) linePoints2[i] = new Vector2((direction * t).x + deltafloat[i], (direction * t).y);
+        }
         first = false;
         lineRenderer.positionCount = position;
         lineRenderer.SetPositions(linePoints);
         if (hitbox)collider2D.SetPoints(new List<Vector2>(linePoints2));
+    }
+
+    private void RenderLine(int position, bool hitbox,GameObject g)
+    {
+        if (position < resolution && !hitbox)
+        {
+            linePoints = new Vector3[position+1];
+        }
+        else
+        {
+            linePoints = new Vector3[position];
+        }
+        if (hitbox) linePoints2 = new Vector2[position];
+
+        for (int i = 0; i < position; i++)
+        {
+            float height = GetProjectileHeight(i);
+            if (direction.y >= 0.5)
+            {
+                linePoints[i] = new Vector3(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y, 0);
+                if (hitbox) linePoints2[i] = new Vector2((direction * height).x + deltafloat[i], (direction * height).y);
+                if (first) linePointTotal[i] = new Vector2(transform.position.x + (direction * height).x + deltafloat[i], transform.position.y + (direction * height).y);
+            }
+            else
+            {
+                linePoints[i] = new Vector3(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i], 0);
+                if (hitbox) linePoints2[i] = new Vector2((direction * height).x, (direction * height).y + deltafloat[i]);
+                if (first) linePointTotal[i] = new Vector2(transform.position.x + (direction * height).x, transform.position.y + (direction * height).y + deltafloat[i]);
+            }
+        }
+       if (position< resolution && !hitbox )
+        {
+            linePoints[position] = g.transform.position;
+            lineRenderer.positionCount = position +1;
+        }
+        else
+        {
+            lineRenderer.positionCount = position;
+        }
+        first = false;
+        lineRenderer.SetPositions(linePoints);
+        if (hitbox) collider2D.SetPoints(new List<Vector2>(linePoints2));
     }
 
     private void RenderLineCut()
@@ -107,7 +155,7 @@ public class ondes : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject != shooter)
+        if(other.gameObject != shooter && other.gameObject.layer != 7)
         {
             otherObject = other;
             distance = Vector2.Distance(new Vector2(linePointTotal[0].x, linePointTotal[0].y), other.gameObject.transform.position);

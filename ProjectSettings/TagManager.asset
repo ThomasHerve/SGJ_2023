@@ -12,6 +12,7 @@ TagManager:
   - PlayerPlaceHolder3
   - inputManager
   - EventSystem
+  - Bordure
   layers:
   - Default
   - TransparentFX

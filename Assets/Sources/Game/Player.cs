@@ -158,6 +158,7 @@ public class Player : MonoBehaviour
         return speedVert;
     }
 
+
     [SerializeField]
     AudioClip[] voiceClips;
 
@@ -167,6 +168,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         characterControler = GetComponent<CharacterControler2D>();
+        characterControler.color = color;
         menuPlayer.SetActive(true);
         lifebar = menuPlayer.GetComponentInChildren<LifeBar>();
         lifebar.SetMaxHealth(100);
@@ -263,6 +265,10 @@ public class Player : MonoBehaviour
     {
         bras.sprite = sprite2;
         corps.sprite = sprite1;
+        if(characterControler != null)
+        {
+            characterControler.color = color;
+        }
         //slowBras.sprite = sprite;
         color = v;
     }

@@ -14,10 +14,18 @@ public class CharacterControler2D : MonoBehaviour
     public bool isdead;
     private SpriteRenderer spriteRendererBras;
     float cd = 0f;
-
+    public string color;
     private bool shootInput;
     [SerializeField]
-    private GameObject PivotBras, Canon, balle;
+    private GameObject PivotBras, Canon;
+    [SerializeField]
+    private GameObject tireBleu;
+    [SerializeField]
+    private GameObject tireVert;
+    [SerializeField]
+    private GameObject tireRouge;
+    [SerializeField]
+    private GameObject tireOrange;
     [SerializeField]
     private float speed;
     [SerializeReference]
@@ -32,6 +40,14 @@ public class CharacterControler2D : MonoBehaviour
     public bool isKeyboard = false;
     private bool isRight = true;
 
+
+    GameObject GetGameObjectFromColor()
+    {
+        if (color == "Rouge") return tireRouge;
+        if (color == "Bleu") return tireBleu;
+        if (color == "Orange") return tireOrange;
+        return tireVert;
+    }
     // Start is called before the first frame update
     void Awake()
     {
@@ -114,7 +130,7 @@ public class CharacterControler2D : MonoBehaviour
             {
                 cd = Time.time;
                 //Tirer
-                GameObject g = GameObject.Instantiate(balle, new Vector3(Canon.transform.position.x, Canon.transform.position.y,1), Quaternion.Euler(0, 0, 0));
+                GameObject g = GameObject.Instantiate(GetGameObjectFromColor(), new Vector3(Canon.transform.position.x, Canon.transform.position.y,1), Quaternion.Euler(0, 0, 0));
                 g.transform.SetParent(gameObject.transform);
                 ondes o = g.GetComponent<ondes>();
                 transform.Find("Pivot Bras").GetComponent<AudioSource>().PlayOneShot(shootClip);

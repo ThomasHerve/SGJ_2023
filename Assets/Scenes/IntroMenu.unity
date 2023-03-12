@@ -2118,8 +2118,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Multiplayer Game\n\nA game made with Unity \nAt Scientific Game Jam Grenoble
     2023\n\nDoctorant : \n- Victor LEVRAGUE\n\nGame Designers : \n - Morgan Morlon\n-
-    Etienne Gabert\n\nArtists :\n - Stella Poignet\n\nDevelopers : \n - Benoit Sonzogni\n
-    - Thomas Herve\n\nSound Designer :\n - Fran\xE7ois-Xavier Gros"
+    Etienne Gabert\n\nArtists :\n - Stella Poignet\n\nDevelopers : \n - Benoit Sonzogni\n-
+    Thomas Herve\n\nSound Designer :\n - Fran\xE7ois-Xavier Gros"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}
@@ -2337,7 +2337,7 @@ MonoBehaviour:
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 129299356}
     m_SelectOnDown: {fileID: 447271980}
-    m_SelectOnLeft: {fileID: 1947208093}
+    m_SelectOnLeft: {fileID: 1561844160}
     m_SelectOnRight: {fileID: 447271980}
   m_Transition: 2
   m_Colors:
@@ -5428,7 +5428,7 @@ MonoBehaviour:
     m_SelectOnUp: {fileID: 129299356}
     m_SelectOnDown: {fileID: 447271980}
     m_SelectOnLeft: {fileID: 1947208093}
-    m_SelectOnRight: {fileID: 447271980}
+    m_SelectOnRight: {fileID: 384645788}
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -5844,7 +5844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Explication
+  m_text: "Cr\xE9dits"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}
@@ -6899,7 +6899,7 @@ MonoBehaviour:
     m_SelectOnUp: {fileID: 129299356}
     m_SelectOnDown: {fileID: 447271980}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 384645788}
+    m_SelectOnRight: {fileID: 1561844160}
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
