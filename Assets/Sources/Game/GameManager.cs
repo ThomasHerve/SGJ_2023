@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
     GameObject[] obstacles;
 
     [SerializeField]
+    GameObject[] obstacles2;
+
+    GameObject[] currentObstacles;
+
+    [SerializeField]
     Transform[] axisLeft;
     [SerializeField]
     Transform[] axisUp;
@@ -39,11 +44,11 @@ public class GameManager : MonoBehaviour
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         StartGame();
-
     }
 
     public void StartGame()
     {
+        currentObstacles = obstacles;
         canvas.transform.Find("EndGame").gameObject.SetActive(false);
         canvas.transform.Find("StartGame").gameObject.SetActive(true);
         players.ForEach(p => p.Reinit());
@@ -148,7 +153,18 @@ public class GameManager : MonoBehaviour
                 dest = new Vector2(Random.Range(axisUp[0].position.x, axisUp[1].position.x), Random.Range(axisUp[0].position.y, axisUp[1].position.y));
                 break;
         }
-        Instantiate(obstacles[Random.Range(0, obstacles.Length)], pos, Quaternion.identity).GetComponent<Obstacle>().setup(dest - pos);
+        Instantiate(currentObstacles[Random.Range(0, obstacles.Length)], pos, Quaternion.identity).GetComponent<Obstacle>().setup(dest - pos);
+    }
+
+    public void setObstacles(int id)
+    {
+        if(id == 1)
+        {
+            currentObstacles = obstacles;
+        } else
+        {
+            obstacles = obstacles2;
+        }
     }
 
 }
