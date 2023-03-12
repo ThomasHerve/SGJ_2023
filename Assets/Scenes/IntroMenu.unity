@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4977,9 +4977,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'test
-
-'
+  m_text: "Rejoindre lobby\_:\nbarre d\u2019espace, Maj Droite, G\xE2chette Droite\r\n\nLancer
+    partie\_: \nclic sur bouton Lancer ou touche Entr\xE9e\n\nJouer au clavier (2
+    joueurs maximum)\_:\r\n\r\n  D\xE9placement\_: z, q, s, d. (J1), fl\xE8ches (J2)\r\n 
+    Tir\_: barre d\u2019espace (J1), Maj Droite (J2)\r\n\r\nJouer \xE0 la manette
+    (4 joueurs maximum)\_:\r\n\r\nD\xE9placement\_: Joystick gauche\r\nVis\xE9e\_:
+    Joystick droite\r\nTir\_: g\xE2chette droite"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}
@@ -5016,9 +5019,9 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -3
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
