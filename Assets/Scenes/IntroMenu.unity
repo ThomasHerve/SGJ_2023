@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Presser\nSpace \nou\nA \npour Rejoindre"
+  m_text: "Presser\nSpace, Maj \nou\nA \npour Rejoindre"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}
@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Presser\nSpace \nou\nA \npour Rejoindre"
+  m_text: "Presser\nSpace, Maj \nou\nA \npour Rejoindre"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}
@@ -2767,7 +2767,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Presser\nSpace \nou\nA \npour Rejoindre"
+  m_text: "Presser\nSpace, Maj \nou\nA \npour Rejoindre"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}
@@ -4188,7 +4188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Presser\nSpace \nou\nA \npour Rejoindre"
+  m_text: "Presser\nSpace, Maj \nou\nA \npour Rejoindre"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}

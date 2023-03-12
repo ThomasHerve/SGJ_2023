@@ -102,6 +102,11 @@ public class GameManager : MonoBehaviour
         {
             case GameState.START:
                 gameState = GameState.RUNNING;
+                for (int i = 0; i < players.Count; i++)
+                {
+                    players[i].transform.position = Spawner.transform.GetChild(i).transform.position;
+                    players[i].transform.rotation = Spawner.transform.GetChild(i).transform.rotation;
+                }
                 break;
             case GameState.RUNNING:
                 GameRun();
