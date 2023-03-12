@@ -122,6 +122,7 @@ public class GamerManager : MonoBehaviour
     {
         PlayerInstance.players = new List<PlayerInstance>(Enumerable.Repeat<PlayerInstance>(null, 4));
         PlayerInstance.has2PlayerKeyboard = false;
+        PlayerInstance.currentPlayerNumber = 0;
     }
 
 }
