@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public int spikesDamage;
     public float armorReduction;
     public float corrosionMultiplier;
-
+    public float speedMuliplier;
 
     // Mutation values
     private int mutationCurrentValue = 0;
@@ -41,8 +41,15 @@ public class Player : MonoBehaviour
     [Tooltip("Mutations")]
     public Mutation[] mutations;
     private Mutation[] currentMutations = new Mutation[2] { new Mutation { index = -1 } , new Mutation { index = -1 } };
-
-
+    [SerializeField]
+    private Sprite speedBleu;
+    [SerializeField]
+    private Sprite speedVert;
+    [SerializeField]
+    private Sprite speedOrange;
+    [SerializeField]
+    private Sprite speedRouge;
+    private Sprite original;
 
     public void SetNextMutationValues()
     {
@@ -89,6 +96,17 @@ public class Player : MonoBehaviour
                 spikes = value;
                 mutations[num].effectBody.gameObject.SetActive(value);
                 break;
+            case 6:
+                speedBuff = value;
+                if(value)
+                {
+                    GetComponent<SpriteRenderer>().sprite = GetSpriteFromColor();
+                } else
+                {
+                    GetComponent<SpriteRenderer>().sprite = original;
+                }
+                break;
+
         }
 
     }
@@ -121,6 +139,7 @@ public class Player : MonoBehaviour
     public bool armor = false;
     public bool corrosion = false;
     public bool spikes = false;
+    public bool speedBuff = false;
 
     // Mutation functions
     System.Collections.IEnumerator HealMutation(int num)
@@ -129,6 +148,14 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(2);
         RemoveMutation(0);
         RemoveMutation(1);
+    }
+
+    Sprite GetSpriteFromColor()
+    {
+        if (color == "Rouge") return speedRouge;
+        if (color == "Bleu") return speedBleu;
+        if (color == "Orange") return speedOrange;
+        return speedVert;
     }
 
     [SerializeField]
@@ -148,9 +175,9 @@ public class Player : MonoBehaviour
         currentMutations[0] = new Mutation { index = -1 };
         currentMutations[1] = new Mutation { index = -1 };
         SetNextMutationValues();
+        original = GetComponent<SpriteRenderer>().sprite;
 
         // DEBUG
-        //AddMutation(5);
     }
 
     // Update is called once per frame

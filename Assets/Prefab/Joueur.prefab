@@ -1309,6 +1309,7 @@ MonoBehaviour:
   spikesDamage: 5
   armorReduction: 0.7
   corrosionMultiplier: 1.2
+  speedMuliplier: 1.7
   knockbackForce: 2
   knockbackDuration: 0.3
   menuPlayer: {fileID: 0}
@@ -1335,11 +1336,19 @@ MonoBehaviour:
   - index: 5
     effectBody: {fileID: 6189015705235872248}
     effectArms: {fileID: 6189015705235872248}
+  - index: 6
+    effectBody: {fileID: 6189015705235872248}
+    effectArms: {fileID: 6189015705235872248}
+  speedBleu: {fileID: 21300000, guid: acfd7274a73c21b4293a62fad96d5702, type: 3}
+  speedVert: {fileID: 21300000, guid: 4bc7e1b3b6f23e242bcb731dc2e090f6, type: 3}
+  speedOrange: {fileID: 21300000, guid: 52f34a1de53eb864aa3925d8831996cd, type: 3}
+  speedRouge: {fileID: 21300000, guid: bceaf29482b9ce942a7d1e199f069c4c, type: 3}
   confuse: 0
   sleep: 0
   armor: 0
   corrosion: 0
   spikes: 0
+  speedBuff: 0
   voiceClips:
   - {fileID: 8300000, guid: 4d02cb6bac6f9044181375af717ab0a4, type: 3}
   - {fileID: 8300000, guid: a8b12a26706f5434db9704213f3c806e, type: 3}

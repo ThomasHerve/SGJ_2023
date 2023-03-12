@@ -151,6 +151,10 @@ public class CharacterControler2D : MonoBehaviour
         {
             returnSpeed *= 0.5f;
         }
+        if (player.speedBuff)
+        {
+            returnSpeed *= player.speedMuliplier;
+        }
         return returnSpeed;
     }
 
