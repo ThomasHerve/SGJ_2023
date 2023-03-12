@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.MultiPlayerGame.Shared;
 using UnityEngine;
@@ -115,6 +116,12 @@ public class GamerManager : MonoBehaviour
                 }
             i++;
         }
+    }
+
+    public void QuitGame()
+    {
+        PlayerInstance.players = new List<PlayerInstance>(Enumerable.Repeat<PlayerInstance>(null, 4));
+        PlayerInstance.has2PlayerKeyboard = false;
     }
 
 }

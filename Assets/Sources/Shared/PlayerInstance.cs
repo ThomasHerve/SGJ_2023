@@ -27,8 +27,6 @@ namespace Unity.MultiPlayerGame.Shared
         public static int currentPlayerNumber = 0;
         public static bool has2PlayerKeyboard = false;
 
-
-
         public static int AddPlayer(PlayerInstance player)
         {
             if (currentPlayerNumber == MAX_PLAYER)
@@ -230,6 +228,10 @@ namespace Unity.MultiPlayerGame.Shared
             if (currentPlayerNumber == 0)
                 GameObject.FindGameObjectWithTag("EventSystem").GetComponent<InputSystemUIInputModule>().actionsAsset.FindAction("Cancel").Enable();
             
+        }
+        public void forceQuitting()
+        {
+            players = new List<PlayerInstance>(Enumerable.Repeat<PlayerInstance>(null, MAX_PLAYER));
         }
 
         #endregion
