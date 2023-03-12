@@ -83,6 +83,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 23455088395630923, guid: 1400561d5ae465542bc7a5d6cc68ae85, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a920f7644149ea94981c67a264b4512a, type: 3}
+    - target: {fileID: 23455088395630923, guid: 1400561d5ae465542bc7a5d6cc68ae85, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23455088395630923, guid: 1400561d5ae465542bc7a5d6cc68ae85, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919006466430468591, guid: 1400561d5ae465542bc7a5d6cc68ae85, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -178,6 +190,18 @@ PrefabInstance:
     - target: {fileID: 3980066425554189348, guid: 1400561d5ae465542bc7a5d6cc68ae85, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5640950373378103532, guid: 1400561d5ae465542bc7a5d6cc68ae85, type: 3}
+      propertyPath: m_Color.b
+      value: 0.2264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 5640950373378103532, guid: 1400561d5ae465542bc7a5d6cc68ae85, type: 3}
+      propertyPath: m_Color.g
+      value: 0.2264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 5640950373378103532, guid: 1400561d5ae465542bc7a5d6cc68ae85, type: 3}
+      propertyPath: m_Color.r
+      value: 0.2264151
       objectReference: {fileID: 0}
     - target: {fileID: 7369120971054423999, guid: 1400561d5ae465542bc7a5d6cc68ae85, type: 3}
       propertyPath: spritebg
