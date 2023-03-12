@@ -130,6 +130,7 @@ public class Player : MonoBehaviour
 
             // Switch mutation
             SetSwitchMutation(index, true);
+            mutationSource.PlayOneShot(mutationClip);
         }
     }
 
@@ -160,9 +161,13 @@ public class Player : MonoBehaviour
 
 
     [SerializeField]
-    AudioClip[] voiceClips;
-
-    bool isVoicePlaying = false;
+    AudioClip[] deathClips;
+    [SerializeField]
+    AudioClip mutationClip;
+    [SerializeField]
+    AudioSource deathSource;
+    [SerializeField]
+    AudioSource mutationSource;
 
     // Start is called before the first frame update
     void Start()
@@ -217,19 +222,8 @@ public class Player : MonoBehaviour
         if (vie < 0) { vie = 0;}
         if (vie == 0) Die();
         lifebar.SetHealth(vie);
-        if (!isVoicePlaying)
-        {
-            isVoicePlaying = true;
-            GetComponent<AudioSource>().PlayOneShot(voiceClips[UnityEngine.Random.Range(0, voiceClips.Length)]);
-            StartCoroutine(WaitDelayForVoice(6f));
-        }
     }
 
-    IEnumerator WaitDelayForVoice(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        isVoicePlaying = false;
-    }
 
     public void TakeMutation(int value)
     {
@@ -245,6 +239,7 @@ public class Player : MonoBehaviour
             AddMutation(indexs[Random.Range(0, indexs.Count)]);
             //AddMutation(3);
         }
+
     }
 
     public void Heal(int value)
@@ -259,6 +254,8 @@ public class Player : MonoBehaviour
     {
         characterControler.DieAnimation();
         characterControler.isdead = true;
+        deathSource.PlayOneShot(deathClips[Random.Range(0, deathClips.Length)]);
+
     }
 
     internal void changeSkin(Sprite sprite1, Sprite sprite2, Sprite sprite3, Sprite sprite, string v)
