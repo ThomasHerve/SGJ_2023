@@ -13,6 +13,8 @@ public class BackgroundManager : MonoBehaviour
     [SerializeField]
     GameManager gameManager;
 
+    public static int id = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +23,7 @@ public class BackgroundManager : MonoBehaviour
 
     public void Rebuild()
     {
-        float value = Random.value;
-        Debug.Log(value);
-        if (value < 0.5f)
+        if (id == 1)
         {
             // Espace
             gameManager.setObstacles(1);
