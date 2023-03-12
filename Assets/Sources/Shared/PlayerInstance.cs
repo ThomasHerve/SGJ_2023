@@ -96,7 +96,8 @@ namespace Unity.MultiPlayerGame.Shared
             inputDevice = GetComponent<PlayerInput>().GetDevice<InputDevice>();
 
             number = AddPlayer(this);
-
+            skin = number;
+            this.transform.Find("ImageHolder").GetComponent<Image>().sprite = skinList[skin];
             if (number == -1)
             {
                 Debug.Log("Too much players");
@@ -144,21 +145,15 @@ namespace Unity.MultiPlayerGame.Shared
         {
             if (!context.performed)
                 return;
-            bool flag = true;
-            foreach (PlayerInstance p in players)
-            {
-                if (players.Any(pl => pl != null && p != null && pl.skin == p.skin && pl != p))
-                {
-                    flag = false;
-                }
-            }
-            isReady = flag;
+            isReady = true;
 
         }
 
         public void OnPlayerNavigate(InputAction.CallbackContext context)
         {
             if (!context.performed)
+                return;
+            if (isReady)
                 return;
             if (skinList.Length == 0)
                 return;
