@@ -110,7 +110,10 @@ namespace Unity.MultiPlayerGame.Shared
             this.transform.localPosition = new Vector3(0, 0, 0);
             this.transform.localScale = new Vector3(1, 1, 1);
 
-            this.transform.Find("SelectionPanel").GetComponentInChildren<TextMeshProUGUI>().text = inputDevice.name;
+            if (InputDevice.name.StartsWith("X"))
+                this.transform.Find("SelectionPanel").GetComponentInChildren<TextMeshProUGUI>().text = "Xbox Manette";
+            else
+            this.transform.Find("SelectionPanel").GetComponentInChildren<TextMeshProUGUI>().text = "Clavier";
 
 
             Debug.Log("Player added at position " + number);

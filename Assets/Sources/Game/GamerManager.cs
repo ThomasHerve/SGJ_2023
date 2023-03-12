@@ -60,36 +60,38 @@ public class GamerManager : MonoBehaviour
                 player.GetComponent<CharacterControler2D>().isKeyboard = true;
                 playerComp = player.GetComponent<Player>();
                 playerComp.menuPlayer = Menu[i];
-                    Menu[i].GetComponentInChildren<TextMeshProUGUI>().text = Colorskin[i];
-                    if (Colorskin[i] == "Rouge")
+                    Debug.Log("Couleur :" + Colorskin[p.skin]);
+                    Menu[i].GetComponentInChildren<TextMeshProUGUI>().text = Colorskin[p.skin];
+                    if (Colorskin[p.skin] == "Rouge")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-                    else if (Colorskin[i] == "Orange")
+                    else if (Colorskin[p.skin] == "Orange")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = new Color(1f, 0.5f, 0f, 1f);
-                    else if (Colorskin[i] == "Vert")
+                    else if (Colorskin[p.skin] == "Vert")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
-                    else if (Colorskin[i] == "Bleu")
+                    else if (Colorskin[p.skin] == "Bleu")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
                     gm.players.Add(playerComp);
-                playerComp.changeSkin(sprtCorps[p.skin], sprtBras[p.skin], sprtSlowCorps[p.skin], sprtSlowBras[i],Colorskin[i]);
+                playerComp.changeSkin(sprtCorps[p.skin], sprtBras[p.skin], sprtSlowCorps[p.skin], sprtSlowBras[p.skin],Colorskin[p.skin]);
                 keyboardTaken = true;
             }
             else if (p.InputDevice is Keyboard)
             {
-                GameObject player = playerInputManager.JoinPlayer(i, -1, "keyboard", Keyboard.current).gameObject;
+                    Debug.Log("Couleur :" + Colorskin[p.skin]);
+                    GameObject player = playerInputManager.JoinPlayer(i, -1, "keyboard", Keyboard.current).gameObject;
                 player.GetComponent<PlayerInput>().SwitchCurrentActionMap("PlayerInput2");
                 player.GetComponent<CharacterControler2D>().isKeyboard = true;
                 playerComp = player.GetComponent<Player>();
                 playerComp.menuPlayer = Menu[i];
-                    Menu[i].GetComponentInChildren<TextMeshProUGUI>().text = Colorskin[i];
-                    if (Colorskin[i] == "Rouge")
+                    Menu[i].GetComponentInChildren<TextMeshProUGUI>().text = Colorskin[p.skin];
+                    if (Colorskin[p.skin] == "Rouge")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-                    else if (Colorskin[i] == "Orange")
+                    else if (Colorskin[p.skin] == "Orange")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = new Color(1f, 0.5f, 0f, 1f);
-                    else if (Colorskin[i] == "Vert")
+                    else if (Colorskin[p.skin] == "Vert")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
-                    else if (Colorskin[i] == "Bleu")
+                    else if (Colorskin[p.skin] == "Bleu")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
-                    playerComp.changeSkin(sprtCorps[p.skin], sprtBras[p.skin], sprtSlowCorps[p.skin], sprtSlowBras[i], Colorskin[i]);
+                    playerComp.changeSkin(sprtCorps[p.skin], sprtBras[p.skin], sprtSlowCorps[p.skin], sprtSlowBras[p.skin], Colorskin[p.skin]);
                     gm.players.Add(playerComp);
                 keyboardTaken = true;
             }
@@ -97,14 +99,15 @@ public class GamerManager : MonoBehaviour
             {
                 GameObject player = playerInputManager.JoinPlayer(i, -1, "Gamepad", p.InputDevice).gameObject;
                 playerComp = player.GetComponent<Player>();
-                    Menu[i].GetComponentInChildren<TextMeshProUGUI>().text = Colorskin[i];
-                    if (Colorskin[i] == "Rouge")
+                    Debug.Log("Couleur :" + Colorskin[p.skin]);
+                    Menu[i].GetComponentInChildren<TextMeshProUGUI>().text = Colorskin[p.skin];
+                    if (Colorskin[p.skin] == "Rouge")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-                    else if (Colorskin[i] == "Orange")
+                    else if (Colorskin[p.skin] == "Orange")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = new Color(1f, 0.5f, 0f, 1f);
-                    else if (Colorskin[i] == "Vert")
+                    else if (Colorskin[p.skin] == "Vert")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
-                    else if (Colorskin[i] == "Bleu")
+                    else if (Colorskin[p.skin] == "Bleu")
                         Menu[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
                     playerComp.menuPlayer = Menu[i];
                     playerComp.changeSkin(sprtCorps[p.skin], sprtBras[p.skin], sprtSlowCorps[p.skin], sprtSlowBras[p.skin], Colorskin[p.skin]);
