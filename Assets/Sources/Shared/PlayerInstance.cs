@@ -28,6 +28,7 @@ namespace Unity.MultiPlayerGame.Shared
         public static bool has2PlayerKeyboard = false;
 
 
+
         public static int AddPlayer(PlayerInstance player)
         {
             if (currentPlayerNumber == MAX_PLAYER)
@@ -83,8 +84,11 @@ namespace Unity.MultiPlayerGame.Shared
          */
         [SerializeField]
         Sprite[] skinList;
+        [SerializeField]
+        Sprite[] bg;
 
         InputDevice inputDevice;
+        public GameObject left, right;
         public InputDevice InputDevice { get => inputDevice; set => inputDevice = value; }
 
         int number = -1;
@@ -97,7 +101,6 @@ namespace Unity.MultiPlayerGame.Shared
 
             number = AddPlayer(this);
             skin = number;
-            this.transform.Find("ImageHolder").GetComponent<Image>().sprite = skinList[skin];
             if (number == -1)
             {
                 Debug.Log("Too much players");
@@ -105,8 +108,9 @@ namespace Unity.MultiPlayerGame.Shared
                 return;
 
             }
-
+            this.transform.Find("bg").GetComponent<Image>().sprite = bg[skin];
             GameObject placeholder = GameObject.FindGameObjectWithTag("PlayerPlaceHolder" + number);
+            this.transform.Find("ImageHolder").GetComponent<Image>().sprite = skinList[skin];
             this.transform.SetParent(placeholder.transform);
             this.transform.localPosition = new Vector3(0, 0, 0);
             this.transform.localScale = new Vector3(1, 1, 1);
@@ -169,6 +173,42 @@ namespace Unity.MultiPlayerGame.Shared
 
 
             this.transform.Find("ImageHolder").GetComponent<Image>().sprite = skinList[skin];
+            this.transform.Find("bg").GetComponent<Image>().sprite = bg[skin];
+        }
+
+        public void OnPlayerNavigatenext()
+        {
+            Debug.Log("nzet");
+            if (isReady)
+                return;
+            if (skinList.Length == 0)
+                return;
+            if (isReady)
+                return;
+                skin++;
+
+            skin = (skin % skinList.Length + skinList.Length) % skinList.Length;
+
+
+            this.transform.Find("ImageHolder").GetComponent<Image>().sprite = skinList[skin];
+            this.transform.Find("bg").GetComponent<Image>().sprite = bg[skin];
+        }
+        public void OnPlayerNavigatePrevious()
+        {
+            if (isReady)
+                return;
+            if (skinList.Length == 0)
+                return;
+            if (isReady)
+                return;
+
+                skin--;
+
+            skin = (skin % skinList.Length + skinList.Length) % skinList.Length;
+
+
+            this.transform.Find("ImageHolder").GetComponent<Image>().sprite = skinList[skin];
+            this.transform.Find("bg").GetComponent<Image>().sprite = bg[skin];
         }
 
         public void OnPlayerAddOther(InputAction.CallbackContext context)

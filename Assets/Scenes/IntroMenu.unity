@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Presser\nSpace \nou\nA \npou Rejoindre"
+  m_text: "Presser\nSpace \nou\nA \npour Rejoindre"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}
@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Presser\nSpace \nou\nA \npou Rejoindre"
+  m_text: "Presser\nSpace \nou\nA \npour Rejoindre"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}
@@ -2767,7 +2767,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Presser\nSpace \nou\nA \npou Rejoindre"
+  m_text: "Presser\nSpace \nou\nA \npour Rejoindre"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}
@@ -4188,7 +4188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Presser\nSpace \nou\nA \npou Rejoindre"
+  m_text: "Presser\nSpace \nou\nA \npour Rejoindre"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3465c85f37df87343b37ac221a015696, type: 2}
   m_sharedMaterial: {fileID: 8957502915163536748, guid: 3465c85f37df87343b37ac221a015696, type: 2}
@@ -4977,7 +4977,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Rejoindre lobby\_:\nbarre d\u2019espace, Maj Droite, G\xE2chette Droite\r\n\nLancer
+  m_text: "Rejoindre lobby\_:\nbarre d\u2019espace, Maj Droite, Touche A\n\nLancer
     partie\_: \nclic sur bouton Lancer ou touche Entr\xE9e\n\nJouer au clavier (2
     joueurs maximum)\_:\r\n\r\n  D\xE9placement\_: z, q, s, d. (J1), fl\xE8ches (J2)\r\n 
     Tir\_: barre d\u2019espace (J1), Maj Droite (J2)\r\n\r\nJouer \xE0 la manette
